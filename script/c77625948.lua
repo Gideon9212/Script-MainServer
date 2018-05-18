@@ -16,14 +16,14 @@ function c77625948.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_DIRECT_ATTACK)
 	c:RegisterEffect(e2)
-	--
+	--atk change
 	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetCode(EFFECT_SET_ATTACK_FINAL)
-	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e3:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 	e3:SetRange(LOCATION_MZONE)
+	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetCondition(c77625948.atkcon)
-	e3:SetValue(c77625948.atkval)
+	e3:SetOperation(c77625948.atkop)
 	c:RegisterEffect(e3)
 end
 function c77625948.eqval(ec,c,tp)
@@ -69,12 +69,26 @@ end
 function c77625948.repval(e,re,r,rp)
 	return bit.band(r,REASON_BATTLE)~=0
 end
-function c77625948.atkcon(e)
-	local tp=e:GetHandlerPlayer()
-	return Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
-		and Duel.GetAttackTarget()==nil and Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)~=0
-		and e:GetHandler():GetEffectCount(EFFECT_DIRECT_ATTACK)==1
+function c77625948.atkcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetAttackTarget()==nil and e:GetHandler():IsHasEffect(EFFECT_DIRECT_ATTACK)
+		and Duel.IsExistingMatchingCard(aux.NOT(Card.IsHasEffect),tp,0,LOCATION_MZONE,1,nil,EFFECT_IGNORE_BATTLE_TARGET)
 end
-function c77625948.atkval(e,c)
-	return c:GetAttack()/2
+function c77625948.atkop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local effs={c:GetCardEffect(EFFECT_DIRECT_ATTACK)}
+	local eg=Group.CreateGroup()
+	for _,eff in ipairs(effs) do
+		eg:AddCard(eff:GetOwner())
+	end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EFFECT)
+	local ec = #eg==1 and eg:GetFirst() or eg:Select(tp,1,1,nil):GetFirst()
+	if c==ec then
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
+		e1:SetRange(LOCATION_MZONE)
+		e1:SetValue(c:GetAttack()/2)
+		e1:SetReset(RESET_EVENT+0x1ff0000+RESET_PHASE+PHASE_DAMAGE_CAL)
+		c:RegisterEffect(e1)
+	end
 end

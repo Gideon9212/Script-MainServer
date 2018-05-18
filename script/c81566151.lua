@@ -30,6 +30,7 @@ function c81566151.initial_effect(c)
 	e5:SetValue(c81566151.atkval)
 	c:RegisterEffect(e5)
 end
+c81566151.listed_names={89943723}
 c81566151.material_setcode={0x8,0x3008,0x9,0x1f}
 function c81566151.contactfil(tp)
 	return Duel.GetMatchingGroup(Card.IsAbleToDeckOrExtraAsCost,tp,LOCATION_ONFIELD,0,nil)

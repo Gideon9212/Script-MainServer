@@ -18,6 +18,7 @@ function c11913700.initial_effect(c)
 	e4:SetOperation(c11913700.spop)
 	c:RegisterEffect(e4)
 end
+c11913700.listed_names={89943723}
 function c11913700.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetPreviousEquipTarget()
 	return e:GetHandler():IsReason(REASON_LOST_TARGET) and not ec:IsLocation(LOCATION_ONFIELD+LOCATION_OVERLAY)

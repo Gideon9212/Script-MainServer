@@ -11,3 +11,4 @@ function c69884162.initial_effect(c)
 	e1:SetValue(89943723)
 	c:RegisterEffect(e1)
 end
+c69884162.listed_names={89943723}

@@ -1,3 +1,4 @@
+--Dragunity Pilum
 --ドラグニティ－ピルム
 function c52977572.initial_effect(c)
 	--equip
@@ -59,8 +60,20 @@ end
 function c52977572.rdcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler():GetEquipTarget()
 	return ep~=tp and c==Duel.GetAttacker() and Duel.GetAttackTarget()==nil
-		and c:GetEffectCount(EFFECT_DIRECT_ATTACK)<2 and Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)>0
+		and c:IsHasEffect(EFFECT_DIRECT_ATTACK)
+		and Duel.IsExistingMatchingCard(aux.NOT(Card.IsHasEffect),tp,0,LOCATION_MZONE,1,nil,EFFECT_IGNORE_BATTLE_TARGET)
 end
 function c52977572.rdop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.ChangeBattleDamage(ep,ev/2)
+	local c=e:GetHandler()
+	local tc=c:GetEquipTarget()
+	local effs={tc:GetCardEffect(EFFECT_DIRECT_ATTACK)}
+	local eg=Group.CreateGroup()
+	for _,eff in ipairs(effs) do
+		eg:AddCard(eff:GetOwner())
+	end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EFFECT)
+	local ec = #eg==1 and eg:GetFirst() or eg:Select(tp,1,1,nil):GetFirst()
+	if c==ec then
+		Duel.ChangeBattleDamage(ep,Duel.GetBattleDamage(ep)/2)
+	end
 end

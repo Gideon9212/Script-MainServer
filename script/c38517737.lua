@@ -32,6 +32,7 @@ function c38517737.initial_effect(c)
 	e3:SetOperation(c38517737.desop)
 	c:RegisterEffect(e3)
 end
+c38517737.listed_names={89631139}
 function c38517737.spcfilter(c)
 	return c:IsCode(89631139) and not c:IsPublic()
 end

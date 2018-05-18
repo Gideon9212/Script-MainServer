@@ -29,6 +29,7 @@ function c39272762.initial_effect(c)
 	e3:SetOperation(c39272762.atop)
 	c:RegisterEffect(e3,false,1)
 end
+c39272762.listed_names={93717133}
 function c39272762.valcheck(e,c)
 	local g=c:GetMaterial()
 	if g:IsExists(Card.IsCode,1,nil,93717133) then

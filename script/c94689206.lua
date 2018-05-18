@@ -53,7 +53,7 @@ function c94689206.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function c94689206.indesval(e,re,r,rp)
-	return bit.band(r,REASON_RULE+REASON_BATTLE)==0
+	return bit.band(r,REASON_BATTLE)==0
 end
 function c94689206.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)

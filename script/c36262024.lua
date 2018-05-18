@@ -11,6 +11,7 @@ function c36262024.initial_effect(c)
 	e1:SetOperation(c36262024.spop)
 	c:RegisterEffect(e1)
 end
+c36262024.listed_names={74677422}
 function c36262024.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
 	Duel.SendtoGrave(e:GetHandler(),REASON_COST)

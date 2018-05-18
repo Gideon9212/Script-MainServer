@@ -12,6 +12,7 @@ function c72044448.initial_effect(c)
 	e1:SetOperation(c72044448.activate)
 	c:RegisterEffect(e1)
 end
+c72044448.listed_names={93717133}
 function c72044448.cfilter1(c)
 	return c:IsFaceup() and c:IsSetCard(0x107b)
 end

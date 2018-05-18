@@ -42,6 +42,7 @@ function c86346643.initial_effect(c)
 	e4:SetOperation(c86346643.tdop3)
 	c:RegisterEffect(e4)
 end
+c86346643.listed_names={89943723}
 c86346643.material_setcode={0x8,0x3008,0x9,0x34,0x2034}
 function c86346643.tdcost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_MZONE,0,1,nil) end

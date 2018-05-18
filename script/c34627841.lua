@@ -11,6 +11,7 @@ function c34627841.initial_effect(c)
 	e1:SetOperation(c34627841.spop)
 	c:RegisterEffect(e1)
 end
+c34627841.listed_names={89631139}
 function c34627841.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable() end
 	Duel.Release(e:GetHandler(),REASON_COST)

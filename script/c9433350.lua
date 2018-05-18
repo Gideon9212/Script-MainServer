@@ -28,6 +28,7 @@ function c9433350.initial_effect(c)
 	e8:SetTarget(c9433350.antarget)
 	c:RegisterEffect(e8)
 end
+c9433350.listed_names={89631139}
 function c9433350.spfilter(c)
 	return c:IsCode(89631139) and c:IsAbleToRemoveAsCost()
 end

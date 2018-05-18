@@ -23,6 +23,7 @@ function c85346853.initial_effect(c)
 	e2:SetOperation(c85346853.drop)
 	c:RegisterEffect(e2)
 end
+c85346853.listed_names={93717133}
 function c85346853.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable() end
 	Duel.Release(e:GetHandler(),REASON_COST)

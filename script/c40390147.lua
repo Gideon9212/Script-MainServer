@@ -14,6 +14,7 @@ function c40390147.initial_effect(c)
 	e1:SetOperation(c40390147.spop)
 	c:RegisterEffect(e1,false,1)
 end
+c40390147.listed_names={93717133}
 function c40390147.spfilter(c,e,tp)
 	return c:IsCode(93717133) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end

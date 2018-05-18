@@ -13,6 +13,7 @@ function c6172122.initial_effect(c)
 	if not AshBlossomTable then AshBlossomTable={} end
 	table.insert(AshBlossomTable,e1)
 end
+c6172122.listed_names={74677422}
 function c6172122.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetActivityCount(tp,ACTIVITY_SUMMON)==0 and Duel.GetActivityCount(tp,ACTIVITY_SPSUMMON)==0 end
 	local e1=Effect.CreateEffect(e:GetHandler())

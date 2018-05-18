@@ -11,6 +11,7 @@ function c64335804.initial_effect(c)
 	e1:SetOperation(c64335804.spop)
 	c:RegisterEffect(e1)
 end
+c64335804.listed_names={74677422}
 function c64335804.spfilter(c)
 	return c:IsCode(74677422) and c:GetEquipGroup():IsExists(Card.IsCode,1,nil,68540058)
 end

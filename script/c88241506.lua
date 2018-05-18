@@ -23,6 +23,7 @@ function c88241506.initial_effect(c)
 	e2:SetOperation(c88241506.spop)
 	c:RegisterEffect(e2)
 end
+c88241506.listed_names={89631139}
 function c88241506.spfilter(c,e,tp)
 	return c:IsCode(89631139) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end

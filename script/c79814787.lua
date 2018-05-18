@@ -10,6 +10,7 @@ function c79814787.initial_effect(c)
 	e1:SetOperation(c79814787.operation)
 	c:RegisterEffect(e1)
 end
+c79814787.listed_names={89631139}
 function c79814787.filter(c)
 	return c:IsCode(89631139) and c:IsAbleToHand()
 end

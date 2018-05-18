@@ -41,6 +41,12 @@ function c19959563.initial_effect(c)
 	e4:SetTarget(c19959563.ddtg)
 	e4:SetOperation(c19959563.ddop)
 	c:RegisterEffect(e4)
+	--splimit
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e5:SetCode(EFFECT_SPSUMMON_CONDITION)
+	c:RegisterEffect(e5)
 end
 function c19959563.spfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x38) and c:IsType(TYPE_MONSTER)

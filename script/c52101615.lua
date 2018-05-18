@@ -23,7 +23,7 @@ function c52101615.subcon(e)
 end
 function c52101615.filter(c,e,tp,m,gc,chkf)
 	return c:IsType(TYPE_FUSION) and c:IsAttribute(ATTRIBUTE_DARK)
-		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:CheckFusionMaterial(m,gc,chkf)
+		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:CheckFusionMaterial(m,gc,chkf+65536)
 end
 function c52101615.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)

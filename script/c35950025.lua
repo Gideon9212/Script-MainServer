@@ -21,6 +21,7 @@ function c35950025.initial_effect(c)
 	e2:SetOperation(c35950025.spop)
 	c:RegisterEffect(e2)
 end
+c35950025.listed_names={93717133}
 function c35950025.cfilter(c)
 	return c:IsFaceup() and (c:IsSetCard(0x55) or c:IsSetCard(0x7b))
 end

@@ -1,4 +1,5 @@
 --プリン隊
+--Putrid Pudding Body Buddies
 function c85101097.initial_effect(c)
 	--cannot release
 	local e1=Effect.CreateEffect(c)
@@ -66,7 +67,9 @@ function c85101097.ctlop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and Duel.Destroy(tc,REASON_EFFECT)~=0
 		and c:IsRelateToEffect(e) and c:IsFaceup() then
-		Duel.GetControl(c,1-tp)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOZONE)
+		local zone=Duel.SelectDisableField(tp,1,0,LOCATION_MZONE,0)>>16
+		Duel.GetControl(c,1-tp,0,0,zone)
 	end
 end
 function c85101097.damcon(e,tp,eg,ep,ev,re,r,rp)

@@ -22,6 +22,7 @@ function c73398797.initial_effect(c)
 	e2:SetOperation(c73398797.spop)
 	c:RegisterEffect(e2)
 end
+c73398797.listed_names={89631139}
 function c73398797.descon(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetAttackTarget()
 	return e:GetHandler()==Duel.GetAttacker() and d and d:IsPosition(POS_FACEDOWN_DEFENSE)

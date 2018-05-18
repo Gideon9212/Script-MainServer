@@ -1,4 +1,5 @@
 --神々の黄昏
+--Gotterdammerung
 function c91148083.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -21,7 +22,9 @@ function c91148083.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function c91148083.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsFaceup() and tc:IsRelateToEffect(e) and Duel.GetControl(tc,1-tp)~=0 then
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOZONE)
+	local zone=Duel.SelectDisableField(tp,1,0,LOCATION_MZONE,0)>>16
+	if tc:IsFaceup() and tc:IsRelateToEffect(e) and Duel.GetControl(tc,1-tp,0,0,zone) then
 		tc:RegisterFlagEffect(91148083,RESET_EVENT+0x1fe0000,0,0)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)

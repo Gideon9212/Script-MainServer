@@ -34,6 +34,7 @@ function c5126490.initial_effect(c)
 	e4:SetValue(1)
 	c:RegisterEffect(e4)
 end
+c5126490.listed_names={89943723}
 function c5126490.spfilter(c,...)
 	return c:IsFaceup() and c:IsCode(...) and c:IsAbleToGraveAsCost()
 end

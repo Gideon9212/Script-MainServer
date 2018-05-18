@@ -1,4 +1,5 @@
 --妖仙獣 鎌弐太刀
+--Yosenju Kama 2
 function c92246806.initial_effect(c)
 	--summon
 	local e1=Effect.CreateEffect(c)
@@ -45,12 +46,22 @@ function c92246806.sumop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c92246806.rdcon(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
 	return ep~=tp and Duel.GetAttackTarget()==nil
-		and c:GetEffectCount(EFFECT_DIRECT_ATTACK)<2 and Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)>0
+		and e:GetHandler():IsHasEffect(EFFECT_DIRECT_ATTACK)
+		and Duel.IsExistingMatchingCard(aux.NOT(Card.IsHasEffect),tp,0,LOCATION_MZONE,1,nil,EFFECT_IGNORE_BATTLE_TARGET)
 end
 function c92246806.rdop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.ChangeBattleDamage(ep,ev/2)
+	local c=e:GetHandler()
+	local effs={c:GetCardEffect(EFFECT_DIRECT_ATTACK)}
+	local eg=Group.CreateGroup()
+	for _,eff in ipairs(effs) do
+		eg:AddCard(eff:GetOwner())
+	end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EFFECT)
+	local ec = #eg==1 and eg:GetFirst() or eg:Select(tp,1,1,nil):GetFirst()
+	if c==ec then
+		Duel.ChangeBattleDamage(ep,Duel.GetBattleDamage(ep)/2)
+	end
 end
 function c92246806.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -1,4 +1,5 @@
 --異次元への案内人
+--D.D. Guide
 function c52702748.initial_effect(c)
 	--control
 	local e1=Effect.CreateEffect(c)
@@ -29,7 +30,9 @@ end
 function c52702748.ctlop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
-	Duel.GetControl(c,1-tp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOZONE)
+	local zone=Duel.SelectDisableField(tp,1,0,LOCATION_MZONE,0)>>16
+	Duel.GetControl(c,1-tp,0,0,zone)
 end
 function c52702748.rmfilter(c,p)
 	return c:IsAbleToRemove(p) and aux.SpElimFilter(c)

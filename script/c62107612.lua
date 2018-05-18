@@ -14,6 +14,7 @@ function c62107612.initial_effect(c)
 	e1:SetOperation(c62107612.operation)
 	c:RegisterEffect(e1)
 end
+c62107612.listed_names={93717133}
 function c62107612.condition(e,tp,eg,ep,ev,re,r,rp)
 	return bit.band(r,REASON_EFFECT)~=0 and re and re:GetHandler():IsCode(93717133)
 end

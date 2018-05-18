@@ -1,4 +1,5 @@
 --アルカナフォースⅦ－THE CHARIOT
+--Arcana Force VII - The Chariot
 function c34568403.initial_effect(c)
 	--coin
 	local e1=Effect.CreateEffect(c)
@@ -45,7 +46,7 @@ function c34568403.arcanareg(c,coin)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_ADJUST)
-	e2:SetRange(LOCATION_MZONE)	
+	e2:SetRange(LOCATION_MZONE) 
 	e2:SetOperation(c34568403.ctop)
 	e2:SetReset(RESET_EVENT+0x1fe0000)
 	c:RegisterEffect(e2)
@@ -78,6 +79,8 @@ function c34568403.ctop(e,tp,eg,ep,ev,re,r,rp)
 	--tails
 	if c:GetFlagEffectLabel(36690018)==0 and c:GetFlagEffectLabel(34568403)==0 then
 		c:SetFlagEffectLabel(34568403,1)
-		Duel.GetControl(c,1-tp)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOZONE)
+		local zone=Duel.SelectDisableField(tp,1,0,LOCATION_MZONE,0)>>16
+		Duel.GetControl(c,1-tp,0,0,zone)
 	end
 end

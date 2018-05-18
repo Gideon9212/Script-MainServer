@@ -25,6 +25,7 @@ function c96561011.initial_effect(c)
 	e3:SetValue(c96561011.val)
 	c:RegisterEffect(e3)
 end
+c96561011.listed_names={74677422}
 function c96561011.val(e,c)
 	return Duel.GetMatchingGroupCount(Card.IsRace,c:GetControler(),LOCATION_GRAVE,0,nil,RACE_DRAGON)*300
 end

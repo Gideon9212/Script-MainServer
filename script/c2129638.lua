@@ -32,6 +32,7 @@ function c2129638.initial_effect(c)
 	c:RegisterEffect(e7)
 end
 c2129638.material_setcode=0xdd
+c2129638.listed_names={89631139}
 function c2129638.splimit(e,se,sp,st)
 	return bit.band(st,SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION
 end

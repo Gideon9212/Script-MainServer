@@ -1,3 +1,4 @@
+--Mystic Box
 --死のマジック・ボックス
 function c25774450.initial_effect(c)
 	--Activate
@@ -28,6 +29,8 @@ function c25774450.activate(e,tp,eg,ep,ev,re,r,rp)
 	local cc=cg:GetFirst()
 	if dc:IsRelateToEffect(e) and cc:IsRelateToEffect(e) and Duel.Destroy(dc,REASON_EFFECT)~=0 then
 		Duel.BreakEffect()
-		Duel.GetControl(cc,1-tp)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOZONE)
+		local zone=Duel.SelectDisableField(tp,1,0,LOCATION_MZONE,0)>>16
+		Duel.GetControl(cc,1-tp,0,0,zone)
 	end
 end

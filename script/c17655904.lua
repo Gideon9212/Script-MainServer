@@ -12,6 +12,7 @@ function c17655904.initial_effect(c)
 	c:RegisterEffect(e1)
 	Duel.AddCustomActivityCounter(17655904,ACTIVITY_ATTACK,c17655904.counterfilter)
 end
+c17655904.listed_names={89631139}
 function c17655904.counterfilter(c)
     return not c:IsCode(89631139)
 end

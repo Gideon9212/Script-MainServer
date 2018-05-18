@@ -31,6 +31,7 @@ function c47274077.initial_effect(c)
 	e5:SetOperation(c47274077.retop)
 	c:RegisterEffect(e5)
 end
+c47274077.listed_names={89943723}
 function c47274077.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=eg:GetFirst()
 	local bc=ec:GetBattleTarget()
