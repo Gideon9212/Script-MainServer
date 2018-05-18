@@ -24,8 +24,9 @@ function c99946920.initial_effect(c)
 	e2:SetTarget(c99946920.sctg)
 	e2:SetOperation(c99946920.scop)
 	c:RegisterEffect(e2)
-	--
+	--effect gain
 	local e3=Effect.CreateEffect(c)
+	e3:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_BE_MATERIAL)
 	e3:SetCondition(c99946920.atkcon)

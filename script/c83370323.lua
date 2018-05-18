@@ -1,7 +1,8 @@
 --トラパート
 function c83370323.initial_effect(c)
-	--
+	--effect gain
 	local e1=Effect.CreateEffect(c)
+	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_BE_MATERIAL)
 	e1:SetCondition(c83370323.con)

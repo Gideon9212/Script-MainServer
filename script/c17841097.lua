@@ -2,6 +2,7 @@
 function c17841097.initial_effect(c)
 	--pierce
 	local e1=Effect.CreateEffect(c)
+	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_BE_MATERIAL)
 	e1:SetCondition(c17841097.pscon)
