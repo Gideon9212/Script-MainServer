@@ -77,7 +77,7 @@ function c44139064.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	if not a:IsControler(tp) then
 		a=Duel.GetAttackTarget()
 	end
-	return a and a:IsSetCard(0x16)
+	return a and a:IsSetCard(0x16) and Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
 end
 function c44139064.atkfilter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x16) and c:IsAbleToGraveAsCost()
@@ -105,7 +105,7 @@ function c44139064.atkop(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_SWAP_BASE_AD)
-		e1:SetReset(RESET_PHASE+PHASE_DAMAGE)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_DAMAGE_CAL+PHASE_END)
 		tc:RegisterEffect(e1)
 	end
 end
