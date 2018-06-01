@@ -66,7 +66,7 @@ function c87257460.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) then
 		if c:IsFaceup() and c:IsRelateToEffect(e) then
 			c87257460.equipop(c,e,tp,tc)
-		else Duel.SendtoGrave(tc,REASON_EFFECT) end
+		else Duel.SendtoGrave(tc,REASON_RULE) end
 	end
 end
 function c87257460.repval(e,re,r,rp)

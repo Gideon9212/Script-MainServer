@@ -70,7 +70,7 @@ function c77693536.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not tc or not (tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:IsType(TYPE_EFFECT)) then return end
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		c77693536.equipop(c,e,tp,tc)
-	else Duel.SendtoGrave(tc,REASON_EFFECT) end
+	else Duel.SendtoGrave(tc,REASON_RULE) end
 end
 function c77693536.mttg(e,c)
 	return c:GetEquipTarget()==e:GetHandler()

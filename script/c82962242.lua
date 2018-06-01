@@ -82,7 +82,7 @@ function c82962242.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not tc or not tc:IsRelateToEffect(e) or not tc:IsType(TYPE_MONSTER) then return end
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		c82962242.equipop(c,e,tp,tc)
-	else Duel.SendtoGrave(tc,REASON_EFFECT) end
+	else Duel.SendtoGrave(tc,REASON_RULE) end
 end
 function c82962242.spfilter(c)
 	return c:GetFlagEffect(82962242)~=0

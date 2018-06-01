@@ -79,7 +79,7 @@ function c66094973.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		if c:IsFaceup() and c:IsRelateToEffect(e) then
 			c66094973.equipop(c,e,tp,tc)
-		else Duel.SendtoGrave(tc,REASON_EFFECT) end
+		else Duel.SendtoGrave(tc,REASON_RULE) end
 	end
 end
 function c66094973.poscon(e,tp,eg,ep,ev,re,r,rp)

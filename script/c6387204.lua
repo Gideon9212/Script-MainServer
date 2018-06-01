@@ -49,7 +49,7 @@ function c6387204.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		if c:IsFaceup() and c:IsRelateToEffect(e) then
 			c6387204.equipop(c,e,tp,tc)
-		else Duel.SendtoGrave(tc,REASON_EFFECT) end
+		else Duel.SendtoGrave(tc,REASON_RULE) end
 	end
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
