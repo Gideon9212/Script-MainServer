@@ -1,4 +1,5 @@
 --ダーク・サンクチュアリ
+--Dark Sanctuary
 function c16625614.initial_effect(c)
 	--activate
 	local e1=Effect.CreateEffect(c)
@@ -37,13 +38,13 @@ function c16625614.chcon1(e,tp,eg,ep,ev,re,r,rp)
 	return rc:IsControler(tp) and rc:IsCode(94212438) and re:GetLabel()==94212438
 end
 function c16625614.chop1(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():RegisterFlagEffect(16625614,RESET_EVENT+0x1fe0000+RESET_CHAIN,0,1)
+	return e:GetHandler():RegisterFlagEffect(16625614,RESET_EVENT+0x1fe0000+RESET_CHAIN,0,1,ev)
 end
 function c16625614.chcon2(e,tp,eg,ep,ev,re,r,rp)
-	return ev==1 and e:GetHandler():GetFlagEffect(16625614)>0
+	return ev==e:GetHandler():GetFlagEffectLabel(16625614)
 end
 function c16625614.chop2(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.ChangeChainOperation(1,c16625614.dbop)
+	return Duel.ChangeChainOperation(ev,c16625614.dbop)
 end
 function c16625614.dbop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

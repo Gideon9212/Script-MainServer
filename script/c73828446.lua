@@ -1,3 +1,4 @@
+--ＳＰＹＲＡＬ ＧＥＡＲ－エクストラアームズ
 --SPYRAL GEAR - Fully Armed
 function c73828446.initial_effect(c)
 	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsCode,41091257))
@@ -37,14 +38,17 @@ end
 function c73828446.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local bc=eg:GetFirst():GetBattleTarget()
 	e:SetLabelObject(bc)
-	if chk==0 then return bc:IsAbleToRemove()
+	if chk==0 then return bc:IsAbleToRemove() and not bc:IsLocation(LOCATION_REMOVED) and bc:IsPublic()
+		and bc:IsType(TYPE_MONSTER) and not bc:IsType(TYPE_TOKEN) and bc:IsRelateToEffect(e)
 		and Duel.IsExistingMatchingCard(Card.IsAbleToRemove,tp,0,LOCATION_ONFIELD,1,bc) end
+	Duel.SetTargetCard(bc)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,bc,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_ONFIELD)
 end
 function c73828446.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local bc=e:GetLabelObject()
-	if bc:IsAbleToRemove() then
+	if bc:IsAbleToRemove() and not bc:IsLocation(LOCATION_REMOVED) and bc:IsPublic()
+		and bc:IsType(TYPE_MONSTER) and not bc:IsType(TYPE_TOKEN) and bc:IsRelateToEffect(e) then
 		local g=Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,0,LOCATION_ONFIELD,bc)
 		if g:GetCount()==0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
