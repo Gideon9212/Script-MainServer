@@ -1,4 +1,5 @@
 --クラウソラスの影霊衣
+--Nekroz of Clausolas
 function c99185129.initial_effect(c)
 	c:EnableReviveLimit()
 	--cannot special summon
@@ -88,12 +89,5 @@ function c99185129.operation(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetValue(RESET_TURN_SET)
 		e3:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e3)
-		if tc:IsType(TYPE_TRAPMONSTER) then
-			local e4=Effect.CreateEffect(c)
-			e4:SetType(EFFECT_TYPE_SINGLE)
-			e4:SetCode(EFFECT_DISABLE_TRAPMONSTER)
-			e4:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
-			tc:RegisterEffect(e4)
-		end
 	end
 end
