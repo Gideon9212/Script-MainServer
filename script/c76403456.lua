@@ -22,8 +22,6 @@ end
 function c76403456.activate(e,tp,eg,ep,ev,re,r,rp)
 	local val=math.ceil(Duel.GetBattleDamage(tp)/500)
 	Duel.DiscardDeck(tp,val,REASON_EFFECT)
-	local og=Duel.GetOperatedGroup()
-	if og:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)<val then return end
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_PRE_BATTLE_DAMAGE)
