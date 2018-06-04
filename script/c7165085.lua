@@ -34,8 +34,8 @@ function c7165085.activate(e,tp,eg,ep,ev,re,r,rp)
 		local te=tc:GetActivateEffect()
 		local tep=tc:GetControler()
 		if not te then
-			local chk = Duel.Destroy(tc,REASON_EFFECT)
-			if chk == 0 then Duel.SendtoGrave(tc,REASON_RULE) end
+			local chk=Duel.Destroy(tc,REASON_EFFECT)
+			if chk==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 		else
 			local condition=te:GetCondition()
 			local cost=te:GetCost()
@@ -76,8 +76,10 @@ function c7165085.activate(e,tp,eg,ep,ev,re,r,rp)
 					tg=g:GetNext()
 				end
 			else
-				local chk = Duel.Destroy(tc,REASON_EFFECT)
-				if chk == 0 then Duel.SendtoGrave(tc,REASON_RULE) end
+				Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
+				Duel.ChangePosition(tc,POS_FACEUP)
+				local chk=Duel.Destroy(tc,REASON_EFFECT)
+				if chk==0 then Duel.SendtoGrave(tc,REASON_RULE) end
 			end
 		end
 	end
