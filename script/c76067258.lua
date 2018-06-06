@@ -56,7 +56,7 @@ function c76067258.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c76067258.indcon(e)
-	return e:GetOwner():IsHasCardTarget(e:GetHandler())
+	return e:GetOwner():IsHasCardTarget(e:GetHandler()) and e:GetOwner():IsOnField() and e:GetOwner():IsFaceup()
 end
 function c76067258.repfilter(c,tp)
 	return c:IsControler(tp) and c:GetFlagEffect(76067258)~=0
