@@ -12,18 +12,16 @@ function c99788587.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c99788587.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFieldGroupCount(Card.IsOnSameColumn,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,e:GetHandler(),false)==3
+	return #e:GetHandler():GetColumnGroup()==3
 end
 function c99788587.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return e:IsHasType(EFFECT_TYPE_ACTIVATE) end
 	local c=e:GetHandler()
-	local g=Duel.GetFieldGroup(Card.IsOnSameColumn,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,c,false)
-	g:AddCard(c)
-	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,g:GetCount(),0,0)
+	local g=c:GetColumnGroup()+c
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
 function c99788587.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.GetFieldGroup(Card.IsOnSameColumn,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,c,false)
-	if c then g:AddCard(c) end	
+	local g=c:GetColumnGroup()+c
 	Duel.Destroy(g,REASON_EFFECT)
 end
