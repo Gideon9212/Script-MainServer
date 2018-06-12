@@ -1,5 +1,5 @@
 # Script-MainServer
-Backup / Scripts used on 7911 and 7921.
+Backup / Scripts used on 7911 and 7921. Note taht this repo does not auto sync with percy, and while server 7911 and 7921 auto sync with this repo, at times, the servers can de-sync.
 
 The main script repo normally is https://github.com/Ygoproco/Live2017Links
 
