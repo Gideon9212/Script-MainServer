@@ -1,5 +1,5 @@
 # Script-MainServer
-Backup / Scripts used on 7911 and 7921
+Backup / Scripts used on 7911 and 7921.
 
 The main script repo normally is https://github.com/Ygoproco/Live2017Links
 
