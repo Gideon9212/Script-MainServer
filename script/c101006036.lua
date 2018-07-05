@@ -31,7 +31,6 @@ function c101006036.initial_effect(c)
 	--destroy replace
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
-	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e4:SetCode(EFFECT_DESTROY_REPLACE)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetTarget(c101006036.desreptg)
@@ -39,13 +38,11 @@ function c101006036.initial_effect(c)
 	Duel.AddCustomActivityCounter(101006036,ACTIVITY_CHAIN,c101006036.chainfilter)
 end
 function c101006036.chainfilter(re,tp,cid)
-	return not (re:IsActiveType(TYPE_MONSTER) and re:GetHandler():IsRace(RACE_THUNDER)
-		and (Duel.GetChainInfo(cid,CHAININFO_TRIGGERING_LOCATION)==LOCATION_HAND))
+	return re:IsActiveType(TYPE_MONSTER) and re:GetHandler():IsRace(RACE_THUNDER)
+		and Duel.GetChainInfo(cid,CHAININFO_TRIGGERING_LOCATION)==LOCATION_HAND
 end
 function c101006036.hspfilter(c,tp,sc)
-	return c:IsRace(RACE_THUNDER) and not c:IsType(TYPE_FUSION,sc,SUMMON_TYPE_FUSION,tp) 
-		and c:IsType(TYPE_EFFECT,sc,SUMMON_TYPE_FUSION,tp) and Duel.GetLocationCountFromEx(tp,tp,c,sc)>0 
-		and Duel.GetCustomActivityCount(101006036,tp,ACTIVITY_CHAIN)~=0
+	return c:IsRace(RACE_THUNDER) and not c:IsType(TYPE_FUSION) and c:IsType(TYPE_EFFECT) and Duel.GetLocationCountFromEx(tp,tp,sc,c)>0 and Duel.GetCustomActivityCount(101006036,tp,ACTIVITY_CHAIN)~=0
 end
 function c101006036.hspcon(e,c)
 	if c==nil then return true end
@@ -53,7 +50,7 @@ function c101006036.hspcon(e,c)
 end
 function c101006036.hspop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=Duel.SelectReleaseGroup(tp,c101006036.hspfilter,1,1,nil,tp,c)
-	Duel.Release(g,REASON_COST+REASON_MATERIAL)
+	Duel.Release(g,REASON_COST)
 end
 function c101006036.repfilter(c)
 	return c:IsRace(RACE_THUNDER) and c:IsAbleToRemove() and aux.SpElimFilter(c,true)

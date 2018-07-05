@@ -1,4 +1,4 @@
---デーモンの顕現
+--デーモンの降臨
 --Manifested Skull Archfiend
 --Scripted by AlphaKretin
 function c32775808.initial_effect(c)

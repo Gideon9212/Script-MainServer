@@ -1,5 +1,5 @@
 --閃刀術式－アフターバーナー
---Sky Striker Maneuver - Afterburners!
+--Brandish Skill Afterburner
 --Scripted by ahtelel
 function c99550630.initial_effect(c)
     --Activate
@@ -32,7 +32,7 @@ end
 function c99550630.activate(e,tp,eg,ep,ev,re,r,rp)
     local tc=Duel.GetFirstTarget()
     if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and Duel.Destroy(tc,REASON_EFFECT)>0 then
-        local dg=Duel.GetMatchingGroup(c99550630.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler())
+        local dg=Duel.GetMatchingGroup(c99550630.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
         if dg:GetCount()>0 and Duel.GetMatchingGroupCount(Card.IsType,tp,LOCATION_GRAVE,0,nil,TYPE_SPELL)>=3 and Duel.SelectYesNo(tp,aux.Stringid(99550630,0)) then
             Duel.BreakEffect()
             Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)

@@ -19,7 +19,7 @@ function c52738610.initial_effect(c)
 	c:RegisterEffect(e2)
 	--tohand
 	local e3=Effect.CreateEffect(c)
-	e3:SetCategory(CATEGORY_TOHAND)
+	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_RELEASE)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
