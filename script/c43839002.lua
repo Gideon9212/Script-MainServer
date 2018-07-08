@@ -33,10 +33,11 @@ function c43839002.activate(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
-		e1:SetReset(RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN)
+		if Duel.GetCurrentPhase()==PHASE_STANDBY then e1:SetLabel(Duel.GetTurnCount()) end
 		e1:SetLabelObject(tc)
 		e1:SetCountLimit(1)
 		e1:SetCondition(c43839002.retcon)
+		e1:SetTarget(c43839002.rettg)
 		e1:SetOperation(c43839002.retop)
 		Duel.RegisterEffect(e1,tp)
 		if tc:IsPreviousPosition(POS_FACEDOWN) then return end
@@ -49,7 +50,11 @@ function c43839002.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c43839002.retcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp
+	return Duel.GetTurnPlayer()==tp and Duel.GetTurnCount()~=e:GetLabel()
+end
+function c43839002.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	e:Reset()
 end
 function c43839002.retop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
