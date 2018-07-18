@@ -41,6 +41,7 @@ function c41517789.atkop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(c41517789.efilter)
 	e1:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_DAMAGE)
 	e:GetHandler():RegisterEffect(e1)
+	Duel.AdjustInstantly(e:GetHandler())
 end
 function c41517789.efilter(e,te)
 	return te:GetOwner()~=e:GetOwner()
