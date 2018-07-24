@@ -25,6 +25,7 @@ function c44311445.initial_effect(c)
 	e2:SetOperation(c44311445.spop)
 	c:RegisterEffect(e2,false,1)
 end
+c44311445.listed_names={74641045}
 function c44311445.ovfilter(c)
 	return c:IsFaceup() and c:IsRankBelow(4) and c:IsSetCard(0x71)
 end

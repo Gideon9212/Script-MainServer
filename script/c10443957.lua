@@ -34,6 +34,7 @@ function c10443957.initial_effect(c)
 	e3:SetOperation(c10443957.disop)
 	c:RegisterEffect(e3,false,1)
 end
+c10443957.listed_names={58069384}
 function c10443957.mfilter(c,xyz,sumtype,tp)
 	return c:IsRace(RACE_MACHINE,xyz,sumtype,tp) and c:IsAttribute(ATTRIBUTE_LIGHT,xyz,sumtype,tp)
 end

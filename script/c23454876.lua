@@ -27,6 +27,7 @@ function c23454876.initial_effect(c)
 	e2:SetOperation(c23454876.damop)
 	c:RegisterEffect(e2,false,1)
 end
+c23454876.listed_names={51960178}
 function c23454876.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end

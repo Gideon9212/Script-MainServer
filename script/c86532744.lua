@@ -17,6 +17,7 @@ function c86532744.initial_effect(c)
 	c:RegisterEffect(e1,false,1)
 end
 c86532744.xyz_number=39
+c86532744.listed_names={84013237}
 function c86532744.ovfilter(c)
 	return c:IsFaceup() and c:IsCode(84013237)
 end

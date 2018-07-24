@@ -28,6 +28,7 @@ function c11522979.initial_effect(c)
 	c:RegisterEffect(e2,false,1)
 end
 c11522979.xyz_number=69
+c11522979.listed_names={2407234}
 function c11522979.descon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp)
 end

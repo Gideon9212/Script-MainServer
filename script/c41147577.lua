@@ -26,6 +26,7 @@ function c41147577.initial_effect(c)
 	e2:SetOperation(c41147577.posop)
 	c:RegisterEffect(e2,false,1)
 end
+c41147577.listed_names={14152862}
 function c41147577.efilter(e,te)
 	return te:IsActiveType(TYPE_MONSTER) and te:GetOwner()~=e:GetOwner()
 end

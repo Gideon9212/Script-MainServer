@@ -31,6 +31,7 @@ function c77205367.initial_effect(c)
 	c:RegisterEffect(e3,false,1)
 end
 c77205367.xyz_number=96
+c77205367.listed_names={55727845}
 function c77205367.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return ep==tp and c:IsRelateToBattle() and eg:GetFirst()==c:GetBattleTarget()

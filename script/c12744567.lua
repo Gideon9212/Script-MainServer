@@ -26,6 +26,7 @@ function c12744567.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 c12744567.xyz_number=101
+c12744567.listed_names={48739166}
 function c12744567.filter(c)
 	return not c:IsType(TYPE_TOKEN) and c:IsAbleToChangeControler()
 		and c:IsSummonType(SUMMON_TYPE_SPECIAL)

@@ -41,6 +41,7 @@ function c75574498.initial_effect(c)
 	e4:SetOperation(c75574498.spop2)
 	c:RegisterEffect(e4,false,1)
 end
+c75574498.listed_names={81587028}
 function c75574498.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_XYZ)
 end

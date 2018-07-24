@@ -26,6 +26,7 @@ function c79985120.initial_effect(c)
 	e2:SetOperation(c79985120.spop)
 	c:RegisterEffect(e2)
 end
+c79985120.listed_names={81927732}
 function c79985120.cfilter(c)
 	return c:IsSetCard(0x95) and c:IsType(TYPE_SPELL) and c:IsDiscardable()
 end

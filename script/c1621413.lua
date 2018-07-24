@@ -30,6 +30,7 @@ function c1621413.initial_effect(c)
 	e2:SetOperation(c1621413.disop)
 	c:RegisterEffect(e2,false,1)
 end
+c1621413.listed_names={16195942}
 function c1621413.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsCode,1,nil,16195942)
 end

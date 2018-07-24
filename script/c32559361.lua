@@ -37,6 +37,7 @@ function c32559361.initial_effect(c)
 	c:RegisterEffect(e3,false,1)
 end
 c32559361.xyz_number=9
+c32559361.listed_names={1992816}
 function c32559361.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local tc=c:GetBattleTarget()

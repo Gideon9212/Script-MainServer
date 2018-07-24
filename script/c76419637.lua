@@ -28,6 +28,7 @@ function c76419637.initial_effect(c)
 	e2:SetOperation(c76419637.damop)
 	c:RegisterEffect(e2,false,1)
 end
+c76419637.listed_names={40424929}
 function c76419637.dccon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp and Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)
 end

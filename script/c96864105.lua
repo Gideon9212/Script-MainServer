@@ -25,6 +25,7 @@ function c96864105.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 c96864105.xyz_number=73
+c96864105.listed_names={36076683}
 function c96864105.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
 	local d=Duel.GetAttackTarget()

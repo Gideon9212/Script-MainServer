@@ -25,6 +25,7 @@ function c41309158.initial_effect(c)
 	e2:SetOperation(c41309158.damop)
 	c:RegisterEffect(e2,false,1)
 end
+c41309158.listed_names={15914410}
 function c41309158.poscon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_XYZ)
 end

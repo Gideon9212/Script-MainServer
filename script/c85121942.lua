@@ -29,6 +29,7 @@ function c85121942.initial_effect(c)
 	c:RegisterEffect(e2,false,1)
 end
 c85121942.xyz_number=105
+c85121942.listed_names={59627393}
 function c85121942.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()

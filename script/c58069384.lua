@@ -41,6 +41,7 @@ function c58069384.initial_effect(c)
 	e3:SetOperation(c58069384.spop)
 	c:RegisterEffect(e3)
 end
+c58069384.listed_names={70095154}
 function c58069384.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)

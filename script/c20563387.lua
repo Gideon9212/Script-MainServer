@@ -27,6 +27,7 @@ function c20563387.initial_effect(c)
 	c:RegisterEffect(e2,false,1)
 end
 c20563387.xyz_number=80
+c20563387.listed_names={93568288}
 function c20563387.filter(c)
 	return c:IsFaceup() and c:IsType(TYPE_XYZ)
 end

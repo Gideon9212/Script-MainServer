@@ -29,6 +29,7 @@ function c20785975.initial_effect(c)
 	c:RegisterEffect(e2,false,1)
 end
 c20785975.xyz_number=103
+c20785975.listed_names={94380860}
 function c20785975.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)

@@ -29,6 +29,7 @@ function c49456901.initial_effect(c)
 	c:RegisterEffect(e2,false,1)
 end
 c49456901.xyz_number=104
+c49456901.listed_names={2061963}
 function c49456901.desfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)
 end

@@ -34,6 +34,7 @@ function c2530830.initial_effect(c)
 	e3:SetOperation(c2530830.operation)
 	c:RegisterEffect(e3)
 end
+c2530830.listed_names={18963306}
 function c2530830.ovfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x107b) and c:IsType(TYPE_XYZ) and c:GetRank()==8
 end

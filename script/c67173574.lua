@@ -36,6 +36,7 @@ function c67173574.initial_effect(c)
 	c:RegisterEffect(e3,false,1)
 end
 c67173574.xyz_number=102
+c67173574.listed_names={49678559}
 function c67173574.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return not c:IsReason(REASON_REPLACE) and c:CheckRemoveOverlayCard(tp,2,REASON_EFFECT) end

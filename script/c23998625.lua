@@ -32,6 +32,7 @@ function c23998625.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 c23998625.xyz_number=53
+c23998625.listed_names={97403510}
 function c23998625.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetTargetCard(Duel.GetAttacker())
@@ -73,6 +74,7 @@ function c23998625.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 			and Duel.IsExistingMatchingCard(c23998625.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,e:GetHandler(),1,nil,nil)
 end
 function c23998625.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -37,6 +37,7 @@ function c43490025.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 c43490025.xyz_number=0
+c43490025.listed_names={65305468}
 function c43490025.xyzfilter(c,xyz,sumtype,tp)
 	return c:IsType(TYPE_XYZ,xyz,sumtype,tp) and not c:IsSetCard(0x48)
 end
