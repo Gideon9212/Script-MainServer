@@ -11,7 +11,8 @@ function c94886282.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c94886282.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,3) end
+	if chk==0 then return Duel.IsPlayerCanDiscardDeckAsCost(tp,3) and 
+	Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>3 end
 	Duel.DiscardDeck(tp,3,REASON_COST)
 end
 function c94886282.filter(c)
