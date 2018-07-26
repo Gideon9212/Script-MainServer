@@ -32,12 +32,7 @@ function c3752422.lvop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetMatchingGroup(c3752422.lvfilter,tp,LOCATION_MZONE,0,nil)
 	local tc=tg:GetFirst()
 	while tc do
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_UPDATE_LEVEL)
-		e1:SetValue(1)
-		e1:SetReset(RESET_EVENT+0xfe0000)
-		tc:RegisterEffect(e1)
+		tc:UpdateLevel(1,RESET_EVENT+0xfe0000,e:GetHandler())
 		tc=tg:GetNext()
 	end
 end
@@ -59,21 +54,10 @@ end
 function c3752422.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local lv=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
-	if c:IsFaceup() and c:IsRelateToEffect(e) then
-		local e1=Effect.CreateEffect(c)
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_UPDATE_LEVEL)
-		e1:SetValue(-lv)
-		e1:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
-		c:RegisterEffect(e1)
+	if c:IsFaceup() and c:IsRelateToEffect(e) and c:UpdateLevel(-lv,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)~=0 then
 		local tc=Duel.GetFirstTarget()
 		if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) then
-			local e2=Effect.CreateEffect(c)
-			e2:SetType(EFFECT_TYPE_SINGLE)
-			e2:SetCode(EFFECT_UPDATE_LEVEL)
-			e2:SetValue(lv)
-			e2:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
-			tc:RegisterEffect(e2)
+			tc:UpdateLevel(lv,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END,c)
 		end
 	end
 end

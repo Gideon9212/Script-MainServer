@@ -44,20 +44,9 @@ end
 function c50903514.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if c:IsFacedown() or not c:IsRelateToEffect(e) or c:GetAttack()<600
-		or tc:IsFacedown() or not tc:IsRelateToEffect(e) then return end
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_UPDATE_ATTACK)
-	e1:SetValue(-600)
-	e1:SetReset(RESET_EVENT+0x1ff0000)
-	c:RegisterEffect(e1)
-	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_UPDATE_ATTACK)
-	e2:SetValue(600)
-	e2:SetReset(RESET_EVENT+0x1fe0000)
-	tc:RegisterEffect(e2)
+	if not c:IsFacedown() and c:IsRelateToEffect(e) and not tc:IsFacedown() and tc:IsRelateToEffect(e) and c:UpdateAttack(-600)==-600 then 
+		tc:UpdateAttack(600,nil,c)
+	end
 end
 function c50903514.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
