@@ -35,7 +35,7 @@ end
 function c5821478.descon(e,tp,eg,ep,ev,re,r,rp)
     if eg:IsContains(e:GetHandler()) then return false end
     for tc in aux.Next(Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_MZONE,LOCATION_MZONE,nil,TYPE_LINK)) do
-        if eg:IsExists(c5821478.cfilter,1,tc,e:GetHandler()) then return true end
+        if eg:IsExists(c5821478.cfilter,1,nil,tc) then return true end
     end
     return false
 end
@@ -63,7 +63,7 @@ function c5821478.ftarget(e,c)
 	return e:GetLabel()~=c:GetFieldID()
 end
 function c5821478.damcon(e,tp,eg,ep,ev,re,r,rp)
-	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.GetAttacker()==e:GetHandler() and Duel.GetAttackTarget()
+	return Duel.GetAttacker()==e:GetHandler() and Duel.GetAttackTarget()
 end
 function c5821478.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
