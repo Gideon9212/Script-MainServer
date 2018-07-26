@@ -31,7 +31,6 @@ function c28429121.filter(c,e,tp,m)
 end
 function c28429121.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return false end
 		local mg1=Duel.GetRitualMaterial(tp)
 		mg1:Remove(Card.IsLocation,nil,LOCATION_HAND)
 		local mg2=Duel.GetMatchingGroup(c28429121.mfilter,tp,0,LOCATION_MZONE,nil,e)
@@ -41,7 +40,6 @@ function c28429121.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function c28429121.activate(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local mg1=Duel.GetRitualMaterial(tp)
 	mg1:Remove(Card.IsLocation,nil,LOCATION_HAND)
 	local mg2=Duel.GetMatchingGroup(c28429121.mfilter,tp,0,LOCATION_MZONE,nil,e)
