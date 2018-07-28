@@ -31,6 +31,7 @@ function c35149085.activate(e,tp,eg,ep,ev,re,r,rp)
 		local lv=tc:GetLevel()
 		if Duel.SendtoHand(tc,nil,REASON_EFFECT)>0 and tc:IsLocation(LOCATION_HAND)
 			and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
+			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local g=Duel.SelectMatchingCard(tp,c35149085.spfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp,lv)
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
