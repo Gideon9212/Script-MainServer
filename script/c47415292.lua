@@ -18,3 +18,4 @@ function c47415292.initial_effect(c)
 	e5:SetCondition(aux.IsUnionState)
 	c:RegisterEffect(e5)
 end
+c47415292.listed_names={11321183}

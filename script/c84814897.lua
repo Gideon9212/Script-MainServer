@@ -25,6 +25,7 @@ function c84814897.initial_effect(c)
 	e3:SetOperation(c84814897.atkop)
 	c:RegisterEffect(e3)
 end
+c84814897.listed_names={11321183}
 function c84814897.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable() end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())

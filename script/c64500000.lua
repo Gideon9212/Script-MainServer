@@ -12,3 +12,4 @@ function c64500000.initial_effect(c)
 	e2:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e2)
 end
+c64500000.listed_names={62651957,65622692}

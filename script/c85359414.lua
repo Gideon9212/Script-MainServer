@@ -14,6 +14,7 @@ function c85359414.initial_effect(c)
 	e3:SetOperation(c85359414.desop)
 	c:RegisterEffect(e3)
 end
+c85359414.listed_names={59364406}
 function c85359414.descon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.IsUnionState(e) and ep~=tp and eg:GetFirst()==e:GetHandler():GetEquipTarget()
 end

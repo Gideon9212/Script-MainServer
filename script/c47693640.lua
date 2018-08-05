@@ -27,6 +27,7 @@ function c47693640.initial_effect(c)
 	e5:SetOperation(c47693640.hdop)
 	c:RegisterEffect(e5)
 end
+c47693640.listed_names={10209545}
 function c47693640.hdcon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.IsUnionState(e) and eg:GetFirst()==e:GetHandler():GetEquipTarget()
 end
