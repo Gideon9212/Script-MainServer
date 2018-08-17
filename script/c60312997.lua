@@ -24,12 +24,11 @@ function c60312997.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function c60312997.operation(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_CHANGE_DAMAGE)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e1:SetReset(RESET_PHASE+PHASE_DAMAGE)
-	e1:SetTargetRange(1,0)
-	e1:SetValue(c60312997.damval)
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e1:SetCode(EVENT_PRE_BATTLE_DAMAGE)
+	e1:SetCondition(c60312997.rdcon)
+	e1:SetOperation(c60312997.rdop)
+	e1:SetReset(RESET_PHASE+PHASE_DAMAGE_CAL)
 	Duel.RegisterEffect(e1,tp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
@@ -42,10 +41,11 @@ function c60312997.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e2,tp)
 	end
 end
-function c60312997.damval(e,re,val,r,rp,rc)
-	if r==REASON_BATTLE then
-		return val/2
-	else return val end
+function c60312997.rdcon(e,tp,eg,ep,ev,re,r,rp)
+	return ep~=tp
+end
+function c60312997.rdop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.HalfBattleDamage(ep)
 end
 function c60312997.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end

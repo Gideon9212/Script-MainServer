@@ -13,5 +13,5 @@ function c31812496.dcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp and Duel.GetAttackTarget()==c
 end
 function c31812496.dop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.ChangeBattleDamage(ep,ev*2)
+	Duel.DoubleBattleDamage(ep)
 end

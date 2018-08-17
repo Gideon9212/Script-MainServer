@@ -42,16 +42,16 @@ function c75253697.desop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(tg,REASON_EFFECT)
 	end
 	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_CHANGE_DAMAGE)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e1:SetTargetRange(0,1)
-	e1:SetValue(c75253697.val)
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e1:SetCode(EVENT_PRE_BATTLE_DAMAGE)
+	e1:SetCondition(c36076683.dcon)
+	e1:SetOperation(c36076683.dop)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
-function c75253697.val(e,re,dam,r,rp,rc)
-	if bit.band(r,REASON_BATTLE)~=0 then
-		return dam/2
-	else return dam end
+function c36076683.dcon(e,tp,eg,ep,ev,re,r,rp)
+	return ep~=tp
+end
+function c36076683.dop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.HalfBattleDamage(ep)
 end

@@ -61,31 +61,24 @@ end
 function c60953118.arcanareg(c,coin)
 	--coin effect
 	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_AVAILABLE_BD)
+	e1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetTargetRange(1,0)
-	e1:SetCode(EFFECT_CHANGE_DAMAGE)
+	e1:SetCode(EVENT_PRE_BATTLE_DAMAGE)
 	e1:SetCondition(c60953118.rdcon1)
-	e1:SetValue(c60953118.rdval)
+	e1:SetOperation(c60953118.rdop)
 	e1:SetReset(RESET_EVENT+0x1fe0000)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
-	e2:SetTargetRange(0,1)
 	e2:SetCondition(c60953118.rdcon2)
 	c:RegisterEffect(e2)
 	c:RegisterFlagEffect(36690018,RESET_EVENT+0x1fe0000,EFFECT_FLAG_CLIENT_HINT,1,coin,63-coin)
 end
 function c60953118.rdcon1(e)
-	return e:GetHandler():GetFlagEffectLabel(36690018)==1
+	return ep==tp and e:GetHandler():GetFlagEffectLabel(36690018)==1
 end
 function c60953118.rdcon2(e)
-	return e:GetHandler():GetFlagEffectLabel(36690018)==0
+	return ep~=tp and e:GetHandler():GetFlagEffectLabel(36690018)==0
 end
-function c60953118.rdval(e,re,val,r,rp,rc)
-	if bit.band(r,REASON_BATTLE)~=0 then
-		return val/2
-	else
-		return val
-	end
+function c60953118.rdop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.HalfBattleDamage(ep)
 end

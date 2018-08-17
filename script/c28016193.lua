@@ -35,7 +35,7 @@ function c28016193.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp and tc:IsSetCard(0xe1) and tc:GetBattleTarget()~=nil and tc:GetBattleTarget():IsDefensePos()
 end
 function c28016193.damop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.ChangeBattleDamage(ep,ev*2)
+	Duel.DoublePiercingDamage(ep)
 end
 function c28016193.descon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)

@@ -46,7 +46,7 @@ function c20281581.rdcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep==tp
 end
 function c20281581.rdop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.ChangeBattleDamage(tp,ev/2)
+	Duel.HalfBattleDamage(ep)
 end
 function c20281581.filter(c)
 	return c:IsFacedown()

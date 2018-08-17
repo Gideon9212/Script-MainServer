@@ -129,15 +129,9 @@ end
 function Group.Includes(g1,g2)
 	return #(g1-g2)+#g2==#g1
 end
-function Auxiliary.ExtraLinked(c,emc,card,eg)
+function Auxiliary.ExtraLinked(c,emc,eg)
 	eg:AddCard(c)
-	local res
-	if c==emc then
-		res=eg:IsContains(card)
-	else
-		local g=c:GetMutualLinkedGroup()
-		res=g and g:IsExists(Auxiliary.ExtraLinked,1,eg,emc,card,eg)
-	end
+	local res=(c==emc) or (c:GetMutualLinkedGroup():IsExists(Auxiliary.ExtraLinked,1,eg,emc,eg))
 	eg:RemoveCard(c)
 	return res
 end
@@ -145,8 +139,12 @@ function Card.IsExtraLinked(c)
 	local card5=Duel.GetFieldCard(0,LOCATION_MZONE,5) and Duel.GetFieldCard(0,LOCATION_MZONE,5) or Duel.GetFieldCard(1,LOCATION_MZONE,6)
 	local card6=Duel.GetFieldCard(0,LOCATION_MZONE,6) and Duel.GetFieldCard(0,LOCATION_MZONE,6) or Duel.GetFieldCard(1,LOCATION_MZONE,5)
 	if card5 and card6 then
-		local mg=card5:GetMutualLinkedGroup()
-		return mg and mg:IsExists(Auxiliary.ExtraLinked,1,nil,card6,c,Group.FromCards(card5))
+		local mg=c:GetMutualLinkedGroup()
+		local emg=(Group.FromCards(card5,card6)-c)
+		for card in aux.Next(emg) do
+			if not mg:IsExists(Auxiliary.ExtraLinked,1,nil,card,Group.FromCards(c)) then return false end
+		end
+		return true
 	end
 	return false
 end
@@ -238,6 +236,7 @@ function Card.IsColumn(c,seq,tp,loc)
 		return cseq==4-seq
 	end
 end
+
 function Card.UpdateAttack(c,amt,reset,rc)
 	rc=rc and rc or c
 	local r=(c==rc) and RESETS_STANDARD_DISABLE or RESETS_STANDARD
@@ -257,6 +256,7 @@ function Card.UpdateAttack(c,amt,reset,rc)
     end
     return 0
 end
+
 function Card.UpdateDefense(c,amt,reset,rc)
 	rc=rc and rc or c
 	local r=(c==rc) and RESETS_STANDARD_DISABLE or RESETS_STANDARD
@@ -276,6 +276,7 @@ function Card.UpdateDefense(c,amt,reset,rc)
     end
     return 0
 end
+
 function Card.UpdateLevel(c,amt,reset,rc)
 	rc=rc and rc or c
 	local r=(c==rc) and RESETS_STANDARD_DISABLE or RESETS_STANDARD
@@ -293,6 +294,7 @@ function Card.UpdateLevel(c,amt,reset,rc)
     end
     return 0
 end
+
 function Card.UpdateRank(c,amt,reset,rc)
 	rc=rc and rc or c
 	local r=(c==rc) and RESETS_STANDARD_DISABLE or RESETS_STANDARD
@@ -310,6 +312,7 @@ function Card.UpdateRank(c,amt,reset,rc)
     end
     return 0
 end
+
 function Card.UpdateLink(c,amt,reset,rc)
 	rc=rc and rc or c
 	local r=(c==rc) and RESETS_STANDARD_DISABLE or RESETS_STANDARD
@@ -327,6 +330,7 @@ function Card.UpdateLink(c,amt,reset,rc)
     end
     return 0
 end
+
 function Card.UpdateScale(c,amt,reset,rc)
 	rc=rc and rc or c
 	local r=(c==rc) and RESETS_STANDARD_DISABLE or RESETS_STANDARD
@@ -347,6 +351,7 @@ function Card.UpdateScale(c,amt,reset,rc)
 	end
 	return 0
 end
+
 function Auxiliary.Stringid(code,id)
 	return code*16+id
 end
@@ -599,6 +604,10 @@ end
 --default filter for EFFECT_CANNOT_BE_BATTLE_TARGET
 function Auxiliary.imval1(e,c)
 	return not c:IsImmuneToEffect(e)
+end
+--default filter for EFFECT_CANNOT_BE_BATTLE_TARGET + opponent
+function Auxiliary.imval2(e,c)
+	return Auxiliary.imval1(e,c) and c:GetControler()~=e:GetHandlerPlayer()
 end
 --filter for EFFECT_CANNOT_BE_EFFECT_TARGET + opponent 
 function Auxiliary.tgoval(e,re,rp)
@@ -1080,4 +1089,5 @@ loadutility("proc_link.lua")
 loadutility("proc_equip.lua")
 loadutility("proc_persistent.lua")
 loadutility("proc_workaround.lua")
+loadutility("proc_damage_fix.lua")
 pcall(dofile,"init.lua")

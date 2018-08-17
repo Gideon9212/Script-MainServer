@@ -14,7 +14,7 @@ function c76589815.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_CANNOT_BE_BATTLE_TARGET)
 	e3:SetCondition(c76589815.atcon)
-	e3:SetValue(1)
+	e3:SetValue(aux.imval2)
 	c:RegisterEffect(e3)
 	--atk
 	local e3=Effect.CreateEffect(c)

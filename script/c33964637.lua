@@ -2,6 +2,7 @@
 --Shadow Six Samurai – Rihan
 function c33964637.initial_effect(c)
 	--Fusion procedure
+  c:EnableReviveLimit()
 	aux.AddFusionProcMixN(c,true,true,c33964637.ffilter,3)
 	aux.AddContactFusion(c,c33964637.contactfil,c33964637.contactop,c33964637.splimit)
 	--fusion limit

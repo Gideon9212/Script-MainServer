@@ -47,7 +47,7 @@ function c32617464.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp and lg:IsContains(tc) and tc:GetBattleTarget()~=nil
 end
 function c32617464.damop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.ChangeBattleDamage(ep,ev*2)
+	Duel.DoubleBattleDamage(ep)
 end
 function c32617464.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetMutualLinkedGroupCount()>=2

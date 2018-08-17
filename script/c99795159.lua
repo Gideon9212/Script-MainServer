@@ -30,12 +30,26 @@ function c99795159.initial_effect(c)
 	e4:SetTargetRange(1,1)
 	e4:SetValue(c99795159.val)
 	c:RegisterEffect(e4)
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
+	e5:SetRange(LOCATION_FZONE)
+	e5:SetCode(EVENT_PRE_BATTLE_DAMAGE)
+	e5:SetCondition(c99795159.dcon)
+	e5:SetOperation(c99795159.dop)
+	c:RegisterEffect(e5)
 end
 function c99795159.dirtg(e,c)
 	return not Duel.IsExistingMatchingCard(Card.IsFaceup,c:GetControler(),0,LOCATION_MZONE,1,nil)
 end
 function c99795159.val(e,re,dam,r,rp,rc)
-	if bit.band(r,REASON_EFFECT)~=0 or (rc and not rc:IsSetCard(0x8d)) then
+	if r&REASON_EFFECT~=0 then
 		return dam/2
 	else return dam end
+end
+function c99795159.dcon(e,tp,eg,ep,ev,re,r,rp)
+	local tc=eg:GetFirst()
+	return not tc:IsSetCard(0x8d)
+end
+function c99795159.dop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.HalfBattleDamage(ep)
 end

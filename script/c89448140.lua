@@ -6,15 +6,23 @@ function c89448140.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
 	--halve damage
-	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetRange(LOCATION_SZONE)
-	e2:SetCode(EFFECT_CHANGE_DAMAGE)
-	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e2:SetTargetRange(1,0)
-	e2:SetCondition(c89448140.condition)
-	e2:SetValue(c89448140.val)
-	c:RegisterEffect(e2)
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetRange(LOCATION_FZONE)
+	e4:SetCode(EFFECT_CHANGE_DAMAGE)
+	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e4:SetTargetRange(1,0)
+	e4:SetCondition(c89448140.condition)
+	e4:SetValue(c89448140.val)
+	c:RegisterEffect(e4)
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetCode(EVENT_PRE_BATTLE_DAMAGE)
+	e1:SetCondition(c89448140.condition)
+	e1:SetCondition(c89448140.dcon)
+	e1:SetOperation(c89448140.dop)
+	c:RegisterEffect(e1)
 	--spsummon
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -33,8 +41,17 @@ function c89448140.condition(e)
 	return Duel.IsExistingMatchingCard(c89448140.cfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function c89448140.val(e,re,dam,r,rp,rc)
-	return math.ceil(dam/2)
+	if bit.band(r,REASON_EFFECT)~=0 then
+		return dam/2
+	else return dam end
 end
+function c89448140.dcon(e,tp,eg,ep,ev,re,r,rp)
+	return ep==tp
+end
+function c89448140.dop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.HalfBattleDamage(ep)
+end
+
 function c89448140.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end

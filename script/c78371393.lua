@@ -48,7 +48,7 @@ function c78371393.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 function c78371393.damcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler()==Duel.GetAttackTarget()
+	return e:GetHandler()==Duel.GetAttackTarget() and Duel.GetAttacker():IsControler(1-tp)
 end
 function c78371393.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAttackPos() end

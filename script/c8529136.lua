@@ -10,6 +10,7 @@ function c8529136.initial_effect(c)
 	e1:SetOperation(c8529136.activate)
 	c:RegisterEffect(e1)
 end
+c8529136.listed_names={60800381}
 function c8529136.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()<PHASE_MAIN2
 end
@@ -83,7 +84,7 @@ function c8529136.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp and e:GetHandler():GetBattleTarget()~=nil and e:GetOwnerPlayer()==tp
 end
 function c8529136.damop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.ChangeBattleDamage(ep,ev*2)
+	Duel.DoubleBattleDamage(ep)
 end
 function c8529136.descon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetBattleTarget()

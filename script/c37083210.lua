@@ -40,7 +40,7 @@ function c37083210.dcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp and Duel.GetAttackTarget()==c
 end
 function c37083210.dop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.ChangeBattleDamage(ep,ev*2)
+	Duel.DoubleBattleDamage(ep)
 end
 function c37083210.desop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetAttacker():IsRelateToBattle() then

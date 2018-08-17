@@ -36,6 +36,7 @@ function c55410871.initial_effect(c)
 	e5:SetOperation(c55410871.damop)
 	c:RegisterEffect(e5)
 end
+c55410871.listed_names={21082832}
 function c55410871.indval(e,re,tp)
 	return tp~=e:GetHandlerPlayer()
 end
@@ -44,5 +45,5 @@ function c55410871.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp and c==Duel.GetAttacker() and Duel.GetAttackTarget() and Duel.GetAttackTarget():IsDefensePos()
 end
 function c55410871.damop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.ChangeBattleDamage(ep,ev*2)
+	Duel.DoublePiercingDamage(ep)
 end

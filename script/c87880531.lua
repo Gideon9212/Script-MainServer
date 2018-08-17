@@ -67,6 +67,10 @@ function c87880531.disop(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetOwner())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CANNOT_TRIGGER)
-	e1:SetReset(RESET_EVENT+0x17a0000)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD&~(RESET_LEAVE|RESET_TOGRAVE))
+	e1:SetCondition(c87880531.con)
 	bc:RegisterEffect(e1)
+end
+function c87880531.con(e)
+	return e:GetHandler():IsType(TYPE_MONSTER)
 end

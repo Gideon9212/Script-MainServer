@@ -1,4 +1,5 @@
 --竜操術
+--Dragon Mastery
 function c99659159.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -26,8 +27,11 @@ function c99659159.initial_effect(c)
 	e3:SetOperation(c99659159.operation)
 	c:RegisterEffect(e3)
 end
+function c99659159.equipf(c)
+	return c:IsSetCard(0x29) and bit.band(c:GetOriginalType(),TYPE_MONSTER)~=0
+end
 function c99659159.atktg(e,c)
-	return c:GetEquipGroup():IsExists(Card.IsSetCard,1,nil,0x29)
+	return c:GetEquipGroup():IsExists(c99659159.equipf,1,nil)
 end
 function c99659159.filter(c)
 	return c:IsSetCard(0x29) and c:IsRace(RACE_DRAGON) and not c:IsForbidden()

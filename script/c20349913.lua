@@ -37,11 +37,26 @@ function c20349913.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_CHANGE_DAMAGE)
 		e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 		e1:SetTargetRange(0,1)
-		e1:SetValue(c20349913.damval)
-		e1:SetReset(RESET_PHASE+PHASE_END)
+		e1:SetValue(c20349913.val)
+		e1:SetReset(RESET_PHASE+PHASE_END,1)
 		Duel.RegisterEffect(e1,tp)
+		local e2=Effect.CreateEffect(e:GetHandler())
+		e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e2:SetCode(EVENT_PRE_BATTLE_DAMAGE)
+		e2:SetCondition(c20349913.rdcon)
+		e2:SetOperation(c20349913.dop)
+		e2:SetReset(RESET_PHASE+PHASE_END)
+		Duel.RegisterEffect(e2,tp)
 	end
 end
-function c20349913.damval(e,re,val,r,rp,rc)
-	return val/2
+function c20349913.rdcon(e,tp,eg,ep,ev,re,r,rp)
+	return ep~=tp
+end
+function c20349913.rdop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.HalfBattleDamage(ep)
+end
+function c20349913.val(e,re,dam,r,rp,rc)
+	if bit.band(r,REASON_EFFECT)~=0 then
+		return dam/2
+	else return dam end
 end

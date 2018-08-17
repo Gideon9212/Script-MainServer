@@ -65,19 +65,19 @@ function c49678559.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if Duel.SelectEffectYesNo(tp,c,96) then
 		local g=c:GetOverlayGroup()
 		Duel.SendtoGrave(g,REASON_EFFECT)
-		local e1=Effect.CreateEffect(c)
-		e1:SetType(EFFECT_TYPE_FIELD)
-		e1:SetCode(EFFECT_CHANGE_DAMAGE)
-		e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-		e1:SetTargetRange(1,0)
-		e1:SetValue(c49678559.damval)
-		e1:SetReset(RESET_PHASE+PHASE_END,1)
+		local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e1:SetCode(EVENT_PRE_BATTLE_DAMAGE)
+		e1:SetCondition(c49678559.dcon)
+		e1:SetOperation(c49678559.dop)
+		e1:SetReset(RESET_PHASE+PHASE_END)
 		Duel.RegisterEffect(e1,tp)
 		return true
 	else return false end
 end
-function c49678559.damval(e,re,dam,r,rp,rc)
-	if bit.band(r,REASON_BATTLE)~=0 then
-		return dam/2
-	else return dam end
+function c49678559.damcon(e,tp,eg,ep,ev,re,r,rp)
+	return ep==tp 
+end
+function c49678559.dop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.HalfBattleDamage(ep)
 end
