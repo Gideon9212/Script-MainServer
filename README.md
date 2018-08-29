@@ -12,4 +12,4 @@ The main script repo normally is https://github.com/Ygoproco/Live2017Links
 
 
 For the ones updating the server:
-As of 05 Aug 2018 re-sync should be resumed from this point <https://github.com/Ygoproco/Live2017Links/commit/a326e4d5dcb1dc9bb3dd646576b8eabdc79a1566>
+As of 05 Aug 2018 re-sync should be resumed from this point <https://github.com/Ygoproco/Live2017Links/tree/d5996421f69a0cdb45ac0b256e54d83f5a3928f4>

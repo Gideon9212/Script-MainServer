@@ -16,10 +16,11 @@ function c46925518.initial_effect(c)
 	e2:SetOperation(c46925518.posop)
 	c:RegisterEffect(e2)
 	--
-	local e3=Effect.CreateEffect(c)
+	local e3=Effect.CreateEffect(c)	
+	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_FLIP)
-	e2:SetTarget(c46925518.fdtg)
+	e3:SetTarget(c46925518.fdtg)
 	e3:SetOperation(c46925518.fdop)
 	c:RegisterEffect(e3)
 end
@@ -32,7 +33,7 @@ end
 function c46925518.postg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsCanTurnSet() and c:GetFlagEffect(46925518)==0 end
-	c:RegisterFlagEffect(46925518,RESET_EVENT+0x1fc0000+RESET_PHASE+PHASE_END,0,1)
+	c:RegisterFlagEffect(46925518,RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET+RESET_PHASE+PHASE_END,0,1)
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,c,1,0,0)
 end
 function c46925518.posop(e,tp,eg,ep,ev,re,r,rp)

@@ -41,7 +41,7 @@ end
 function c88069166.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if tc and c:IsRelateToEffect(e) and tc:IsFaceup() and tc:IsRelateToEffect(e) then
+	if tc and c:IsRelateToEffect(e) and tc:IsFaceup() and tc:IsRelateToEffect(e) and not tc:IsDisabled() then
 		c:SetCardTarget(tc)
 		e:SetLabelObject(tc)
 		local e1=Effect.CreateEffect(c)
@@ -52,6 +52,7 @@ function c88069166.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
 		e1:SetCondition(c88069166.rcon)
 		tc:RegisterEffect(e1)
+		if tc:IsImmuneToEffect(e1) then return end
 		local g1=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 		local g2=Duel.GetMatchingGroup(Card.IsFacedown,tp,0,LOCATION_ONFIELD,nil)
 		g1:Merge(g2)

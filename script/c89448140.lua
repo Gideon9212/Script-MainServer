@@ -1,4 +1,5 @@
 --マジシャンズ・プロテクション
+--Magicians' Defense
 function c89448140.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -8,7 +9,7 @@ function c89448140.initial_effect(c)
 	--halve damage
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
-	e4:SetRange(LOCATION_FZONE)
+	e4:SetRange(LOCATION_SZONE)
 	e4:SetCode(EFFECT_CHANGE_DAMAGE)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e4:SetTargetRange(1,0)
@@ -17,7 +18,7 @@ function c89448140.initial_effect(c)
 	c:RegisterEffect(e4)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
-	e1:SetRange(LOCATION_MZONE)
+	e1:SetRange(LOCATION_SZONE)
 	e1:SetCode(EVENT_PRE_BATTLE_DAMAGE)
 	e1:SetCondition(c89448140.condition)
 	e1:SetCondition(c89448140.dcon)

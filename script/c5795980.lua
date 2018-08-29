@@ -83,13 +83,15 @@ function c5795980.activate(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetValue(RESET_TURN_SET)
 		e2:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e2)
+		local e3
 		if tc:IsType(TYPE_TRAPMONSTER) then
-			local e3=Effect.CreateEffect(c)
+			e3=Effect.CreateEffect(c)
 			e3:SetType(EFFECT_TYPE_SINGLE)
 			e3:SetCode(EFFECT_DISABLE_TRAPMONSTER)
 			e3:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
 			tc:RegisterEffect(e3)
 		end
+		if tc:IsImmuneToEffect(e1) or tc:IsImmuneToEffect(e2) or (e3 and tc:IsImmuneToEffect(e3)) then return end
 		Duel.BreakEffect()
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end
@@ -114,3 +116,4 @@ function c5795980.atop(e,tp,eg,ep,ev,re,r,rp)
 		tc=g:GetNext()
 	end
 end
+
