@@ -15,6 +15,8 @@ function c73360025.initial_effect(c)
 	e2:SetTarget(c73360025.sptg)
 	e2:SetOperation(c73360025.spop)
 	c:RegisterEffect(e2)
+	if not GhostBelleTable then GhostBelleTable={} end
+	table.insert(GhostBelleTable,e2)
 	--damage
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_DAMAGE)

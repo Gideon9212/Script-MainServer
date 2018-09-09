@@ -1,4 +1,5 @@
 --破壊剣の追憶
+--Destruction Sword Memories
 function c32104431.initial_effect(c)
 	--special summon
 	local e1=Effect.CreateEffect(c)
@@ -20,6 +21,8 @@ function c32104431.initial_effect(c)
 	e2:SetTarget(c32104431.fusiontg)
 	e2:SetOperation(c32104431.fusionop)
 	c:RegisterEffect(e2)
+	if not GhostBelleTable then GhostBelleTable={} end
+	table.insert(GhostBelleTable,e2)
 end
 function c32104431.costfilter(c)
 	return c:IsSetCard(0xd6) and c:IsDiscardable()

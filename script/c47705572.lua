@@ -1,4 +1,5 @@
 --月光狼
+--Lunalight Wolf
 function c47705572.initial_effect(c)
 	--pendulum summon
 	aux.EnablePendulumAttribute(c)
@@ -20,6 +21,8 @@ function c47705572.initial_effect(c)
 	e2:SetTarget(c47705572.sptg)
 	e2:SetOperation(c47705572.spop)
 	c:RegisterEffect(e2)
+	if not GhostBelleTable then GhostBelleTable={} end
+	table.insert(GhostBelleTable,e2)
 	--pierce
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)

@@ -1,4 +1,5 @@
 --魔玩具融合
+--Frightfur Fusion
 function c6077601.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -9,6 +10,8 @@ function c6077601.initial_effect(c)
 	e1:SetTarget(c6077601.target)
 	e1:SetOperation(c6077601.activate)
 	c:RegisterEffect(e1)
+	if not GhostBelleTable then GhostBelleTable={} end
+	table.insert(GhostBelleTable,e1)
 end
 function c6077601.filter0(c)
 	return c:IsOnField() and c:IsAbleToRemove()

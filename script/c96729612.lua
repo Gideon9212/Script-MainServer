@@ -1,4 +1,5 @@
 --儀式の準備
+--Preparation of Rites
 function c96729612.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -8,16 +9,18 @@ function c96729612.initial_effect(c)
 	e1:SetTarget(c96729612.target)
 	e1:SetOperation(c96729612.activate)
 	c:RegisterEffect(e1)
+	if not GhostBelleTable then GhostBelleTable={} end
+	table.insert(GhostBelleTable,e1)
 end
 function c96729612.filter(c)
-	return bit.band(c:GetType(),0x81)==0x81 and c:GetLevel()<=7 and c:IsAbleToHand()
+	return (c:GetType()&0x81)==0x81 and c:IsLevelBelow(7) and c:IsAbleToHand()
 end
 function c96729612.filter2(c)
-	return bit.band(c:GetType(),0x82)==0x82 and c:IsAbleToHand()
+	return (c:GetType()&0x82)==0x82 and c:IsAbleToHand()
 end
 function c96729612.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c96729612.filter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK+LOCATION_GRAVE)
 end
 function c96729612.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

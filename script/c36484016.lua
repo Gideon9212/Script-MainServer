@@ -1,4 +1,5 @@
 --ミラクルシンクロフュージョン
+--Miracle Synchro Fusion
 function c36484016.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -8,6 +9,8 @@ function c36484016.initial_effect(c)
 	e1:SetTarget(c36484016.target)
 	e1:SetOperation(c36484016.activate)
 	c:RegisterEffect(e1)
+	if not GhostBelleTable then GhostBelleTable={} end
+	table.insert(GhostBelleTable,e1)
 	--draw
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(36484016,1))

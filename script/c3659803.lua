@@ -1,4 +1,5 @@
 --オーバーロード・フュージョン
+--Overload Fusion
 function c3659803.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -8,6 +9,8 @@ function c3659803.initial_effect(c)
 	e1:SetTarget(c3659803.target)
 	e1:SetOperation(c3659803.activate)
 	c:RegisterEffect(e1)
+	if not GhostBelleTable then GhostBelleTable={} end
+	table.insert(GhostBelleTable,e1)
 end
 function c3659803.filter0(c)
 	return c:IsType(TYPE_MONSTER) and c:IsOnField() and c:IsAbleToRemove()

@@ -1,4 +1,5 @@
 --召喚魔術
+--Invocation
 function c74063034.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -9,6 +10,8 @@ function c74063034.initial_effect(c)
 	e1:SetTarget(c74063034.sptg)
 	e1:SetOperation(c74063034.spop)
 	c:RegisterEffect(e1)
+	if not GhostBelleTable then GhostBelleTable={} end
+	table.insert(GhostBelleTable,e1)
 	--to deck
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(74063034,1))
