@@ -43,8 +43,7 @@ function c73289035.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c73289035.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
-	if g:GetCount()>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+	if #g>0 and Duel.SendtoGrave(g,REASON_EFFECT)>0 and g:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)>0 then
 		Duel.Draw(tp,2,REASON_EFFECT)
 	end
 end

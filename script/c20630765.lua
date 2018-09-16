@@ -1,5 +1,6 @@
 --魔石術師 クルード
 function c20630765.initial_effect(c)
+	c:EnableCounterPermit(0x16)
 	c:SetCounterLimit(0x16,1)
 	--Add counter
 	local e0=Effect.CreateEffect(c)
@@ -14,6 +15,7 @@ function c20630765.initial_effect(c)
 	e1:SetCode(EVENT_CHAIN_SOLVED)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
+	e1:SetCondition(c20630765.ctcon)
 	e1:SetOperation(c20630765.ctop)
 	c:RegisterEffect(e1)
 	--attackup
@@ -37,11 +39,15 @@ function c20630765.initial_effect(c)
 	e3:SetOperation(c20630765.rmop)
 	c:RegisterEffect(e3)
 end
+function c20630765.ctcon(e,tp,eg,ep,ev,re,r,rp)
+	if not re then return false end
+	local c=e:GetHandler()
+	local rc=re:GetHandler()
+	return re:IsActiveType(TYPE_MONSTER) and rc~=c and c:GetFlagEffect(1)>0
+end
 function c20630765.ctop(e,tp,eg,ep,ev,re,r,rp)
-	local c=re:GetHandler()
-	if re:IsActiveType(TYPE_MONSTER) and c~=e:GetHandler() and e:GetHandler():GetFlagEffect(1)>0 then
-		e:GetHandler():AddCounter(0x16,1)
-	end
+	local c=e:GetHandler()
+	c:AddCounter(0x16,1)
 end
 function c20630765.defup(e,c)
 	return c:GetCounter(0x16)*300

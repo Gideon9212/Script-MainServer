@@ -31,14 +31,21 @@ function c22628574.filter(c,e,tp,chk,chain)
 	if te==nil then return false end
 	local condition=te:GetCondition()
 	local target=te:GetTarget()
-	if te:GetCode()==EVENT_CHAINING and chk==1 then
+	if te:GetCode()==EVENT_CHAINING then
 		if chain<=0 then return false end
 		local te2,p=Duel.GetChainInfo(chain,CHAININFO_TRIGGERING_EFFECT,CHAININFO_TRIGGERING_PLAYER)
 		local tc=te2:GetHandler()
 		local g=Group.FromCards(tc)
 		eg,ep,ev,re,r,rp=g,p,chain,te2,REASON_EFFECT,p
+		return (not condition or condition(e,tp,eg,ep,ev,re,r,rp)) and (not target or target(e,tp,eg,ep,ev,re,r,rp,0))
+	elseif te:GetCode()==EVENT_FREE_CHAIN then
+		return (not condition or condition(te,tp,eg,ep,ev,re,r,rp)) and (not cost or cost(te,tp,eg,ep,ev,re,r,rp,0))
+			and (not target or target(te,tp,eg,ep,ev,re,r,rp,0))
+	else
+		local res,teg,tep,tev,tre,tr,trp=Duel.CheckEvent(te:GetCode(),true)
+		return res and (not condition or condition(te,tp,teg,tep,tev,tre,tr,trp)) and (not cost or cost(te,tp,teg,tep,tev,tre,tr,trp,0))
+			and (not target or target(te,tp,teg,tep,tev,tre,tr,trp,0))
 	end
-	return (not condition or condition(e,tp,eg,ep,ev,re,r,rp)) and (not target or target(e,tp,eg,ep,ev,re,r,rp,0))
 end
 function c22628574.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local chain=Duel.GetCurrentChain()
