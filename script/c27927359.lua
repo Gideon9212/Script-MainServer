@@ -8,6 +8,7 @@ function c27927359.initial_effect(c)
 	e1:SetOperation(c27927359.operation)
 	c:RegisterEffect(e1)
 end
+c27927359.listed_names={CARD_HARPIE_LADY}
 function c27927359.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()

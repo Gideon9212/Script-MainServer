@@ -10,3 +10,4 @@ function c91932350.initial_effect(c)
 	e1:SetValue(300)
 	c:RegisterEffect(e1)
 end
+c91932350.listed_names={CARD_HARPIE_LADY}

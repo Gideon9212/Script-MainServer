@@ -21,13 +21,12 @@ function c26885836.eqfilter(c)
 end
 function c26885836.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetBattleTarget()
-	e:SetLabelObject(tc)
 	return aux.bdogcon(e,tp,eg,ep,ev,re,r,rp) and not tc:IsForbidden() 
 		and c26885836.eqconc(e)
 end
 function c26885836.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
-	local tc=e:GetLabelObject()
+	local tc=e:GetHandler():GetBattleTarget()
 	Duel.SetTargetCard(tc)
 	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,tc,1,0,0)
 end

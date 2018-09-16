@@ -20,6 +20,7 @@ function c68815132.initial_effect(c)
 	e2:SetValue(76812113)
 	c:RegisterEffect(e2)
 end
+c68815132.listed_names={CARD_HARPIE_LADY}
 function c68815132.filter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WIND) and c:IsAbleToHand()
 end

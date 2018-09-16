@@ -9,6 +9,7 @@ function c12181376.initial_effect(c)
 	e1:SetOperation(c12181376.activate)
 	c:RegisterEffect(e1)
 end
+c12181376.listed_names={CARD_HARPIE_LADY_SISTERS}
 function c12181376.filter(c)
 	return c:IsFaceup() and c:IsCode(12206212)
 end

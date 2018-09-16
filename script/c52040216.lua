@@ -12,6 +12,7 @@ function c52040216.initial_effect(c)
 	e2:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e2)
 end
+c52040216.listed_names={CARD_HARPIE_LADY}
 function c52040216.val(e,c)
 	return Duel.GetMatchingGroupCount(c52040216.filter,c:GetControler(),LOCATION_ONFIELD,LOCATION_ONFIELD,nil)*300
 end

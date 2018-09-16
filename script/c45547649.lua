@@ -11,6 +11,7 @@ function c45547649.initial_effect(c)
 	e1:SetOperation(c45547649.operation)
 	c:RegisterEffect(e1)
 end
+c45547649.listed_names={CARD_HARPIE_LADY}
 function c45547649.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_BATTLE)
 end

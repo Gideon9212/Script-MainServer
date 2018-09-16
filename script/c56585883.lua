@@ -39,6 +39,7 @@ function c56585883.initial_effect(c)
 	e4:SetOperation(c56585883.thop)
 	c:RegisterEffect(e4)
 end
+c56585883.listed_names={CARD_HARPIE_LADY}
 function c56585883.filter1(c)
 	return c:IsFaceup() and c:IsRace(RACE_WINDBEAST) and c:IsAbleToHand()
 end

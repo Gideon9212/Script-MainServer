@@ -29,6 +29,7 @@ function c90238142.initial_effect(c)
 	e3:SetValue(7)
 	c:RegisterEffect(e3)
 end
+c90238142.listed_names={CARD_HARPIE_LADY}
 function c90238142.cfilter(c)
 	return c:IsSetCard(0x64) and c:IsDiscardable()
 end

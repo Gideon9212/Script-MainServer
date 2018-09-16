@@ -13,6 +13,7 @@ function c86308219.initial_effect(c)
 	c:RegisterEffect(e1)
 	Duel.AddCustomActivityCounter(86308219,ACTIVITY_SPSUMMON,c86308219.counterfilter)
 end
+c86308219.listed_names={CARD_HARPIE_LADY,CARD_HARPIE_LADY_SISTERS}
 function c86308219.counterfilter(c)
 	return bit.band(c:GetSummonLocation(),LOCATION_DECK+LOCATION_EXTRA)==0
 end

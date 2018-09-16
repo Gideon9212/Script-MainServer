@@ -17,6 +17,7 @@ function c77778835.initial_effect(c)
 	e2:SetOperation(c77778835.desop)
 	c:RegisterEffect(e2)
 end
+c77778835.listed_names={CARD_HARPIE_LADY}
 function c77778835.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
