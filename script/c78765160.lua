@@ -36,6 +36,7 @@ function c78765160.initial_effect(c)
 	e4:SetOperation(c78765160.tdop)
 	c:RegisterEffect(e4)
 end
+c78765160.listed_names={40005099}
 function c78765160.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return c78765160.tdtg(e,tp,eg,ep,ev,re,r,rp,0,chkc) end
 	if chk==0 then return true end

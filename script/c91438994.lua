@@ -1,4 +1,5 @@
 --A・ジェネクス・ベルフレイム
+--Genex Ally Bellflame
 function c91438994.initial_effect(c)
 	c:EnableCounterPermit(0xa)
 	--add counter
@@ -57,7 +58,7 @@ function c91438994.addc2(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c91438994.attackup(e,c)
-	return c:GetCounter(0xa)*100
+	return Duel.GetCounter(0,1,1,0xa)*100
 end
 function c91438994.damp(e,tp,eg,ep,ev,re,r,rp)
 	e:SetLabel(e:GetHandler():GetCounter(0xa))
