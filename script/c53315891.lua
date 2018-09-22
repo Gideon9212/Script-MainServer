@@ -10,6 +10,7 @@ function c53315891.initial_effect(c)
 	e3:SetCode(EFFECT_IMMUNE_EFFECT)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetRange(LOCATION_MZONE)
+	e3:SetCondition(c53315891.econ)
 	e3:SetValue(c53315891.efilter)
 	c:RegisterEffect(e3)
 	--atk & def
@@ -38,6 +39,9 @@ end
 function c53315891.contactop(g)
 	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
 end
+function c53315891.econ(e)
+	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
+end
 function c53315891.efilter(e,te)
 	return te:GetOwner()~=e:GetOwner()
 end
@@ -64,7 +68,7 @@ function c53315891.atkop(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
-		e1:SetReset(RESET_EVENT+0x1fe0000)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e1:SetValue(atk)
 		c:RegisterEffect(e1)
 		local e2=e1:Clone()

@@ -33,7 +33,7 @@ function c19801646.efilter(e,te)
 	return te:IsActiveType(TYPE_MONSTER) and te:GetOwner()~=e:GetOwner()
 end
 function c19801646.econ(e)
-	return Duel.IsEnvironment(22702055)
+	return Duel.IsEnvironment(22702055) and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
 end
 function c19801646.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

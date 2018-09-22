@@ -30,6 +30,7 @@ function c58604027.initial_effect(c)
 	e4:SetCode(EFFECT_IMMUNE_EFFECT)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e4:SetRange(LOCATION_MZONE)
+	e4:SetCondition(c58604027.econ)
 	e4:SetValue(c58604027.efilter)
 	c:RegisterEffect(e4)
 	--to hand
@@ -75,6 +76,9 @@ function c58604027.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local g=Duel.SelectReleaseGroup(tp,c58604027.spfilter,1,1,nil,ft,tp)
 	Duel.Release(g,REASON_COST)
+end
+function c58604027.econ(e)
+	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
 end
 function c58604027.efilter(e,te)
 	return te:GetOwner()~=e:GetOwner()

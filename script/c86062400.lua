@@ -6,6 +6,7 @@ function c86062400.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCode(EFFECT_IMMUNE_EFFECT)
+	e1:SetCondition(c86062400.econ)
 	e1:SetValue(c86062400.efilter)
 	c:RegisterEffect(e1)
 	--
@@ -18,6 +19,9 @@ function c86062400.initial_effect(c)
 	e2:SetTarget(c86062400.tgtg)
 	e2:SetOperation(c86062400.tgop)
 	c:RegisterEffect(e2)
+end
+function c86062400.econ(e)
+	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
 end
 function c86062400.efilter(e,te)
 	return te:IsActiveType(TYPE_XYZ)
