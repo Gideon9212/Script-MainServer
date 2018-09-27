@@ -29,7 +29,8 @@ function c93599951.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ChangePosition(tc,POS_FACEUP_ATTACK)
 		end
 		if tc:IsAttackable() and not tc:IsImmuneToEffect(e) then
-			Duel.CalculateDamage(tc,Duel.GetAttackTarget())
+			Duel.ChangeAttacker(tc)
+			--Duel.CalculateDamage(tc,Duel.GetAttackTarget())
 		end
 	end
 end
