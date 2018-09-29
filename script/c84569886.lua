@@ -1,4 +1,5 @@
 --DDD超死偉王パープリッシュ・ヘル・アーマゲドン
+--D/D/D Super Doom King Purplish Armageddon
 function c84569886.initial_effect(c)
 	c:EnableReviveLimit()
 	aux.EnablePendulumAttribute(c,false)
@@ -49,6 +50,7 @@ end
 function c84569886.atkcon1(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
 	local d=a:GetBattleTarget()
+	if not a or not d then return false end
 	if a:IsControler(1-tp) then a,d=d,a end
 	return a:IsFaceup() and a:IsRelateToBattle() and a:IsSetCard(0x10af) and a:IsType(TYPE_FUSION)
 		and d and d:IsFaceup() and d:IsRelateToBattle() and d:GetAttack()>0 and a:GetControler()~=d:GetControler()
