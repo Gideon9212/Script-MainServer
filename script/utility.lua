@@ -85,6 +85,13 @@ function Card.MoveAdjacent(c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOZONE)
 	Duel.MoveSequence(c,math.log(Duel.SelectDisableField(tp,1,LOCATION_MZONE,0,~flag),2))
 end
+function Group.ForEach(g,f,...)
+	local tc=g:GetFirst()
+	while tc do
+		f(tc,...)
+		tc=g:GetNext()
+	end
+end
 function Auxiliary.GetExtraMaterials(tp,mustg,sc,summon_type)
 	local tg=Group.CreateGroup()
 	mustg = mustg or Group.CreateGroup()
@@ -675,7 +682,7 @@ end
 function Auxiliary.qlifilter(e,te)
 	if te:IsActiveType(TYPE_MONSTER) and te:IsActivated() then
 		local lv=e:GetHandler():GetLevel()
-		local ec=te:GetHandler()
+		local ec=te:GetOwner()
 		if ec:IsType(TYPE_LINK) then
 			return false
 		elseif ec:IsType(TYPE_XYZ) then
@@ -1156,14 +1163,14 @@ function Auxiliary.NeosReturnTarget(c,extrainfo)
 	end
 end
 function Auxiliary.NeosReturnSubstituteFilter(c)
-	return c:IsCode(101007060) and c:IsAbleToRemoveAsCost()
+	return c:IsCode(14088859) and c:IsAbleToRemoveAsCost()
 end
 function Auxiliary.NeosReturnOperation(c,extraop)
 	return function(e,tp,eg,ep,ev,re,r,rp)
 		local c=e:GetHandler()
 		if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 		local sc=Duel.GetFirstMatchingCard(Auxiliary.NecroValleyFilter(Auxiliary.NeosReturnSubstituteFilter),tp,LOCATION_GRAVE,0,nil)
-		if sc and Duel.SelectYesNo(tp,aux.Stringid(101007060,0)) then
+		if sc and Duel.SelectYesNo(tp,aux.Stringid(14088859,0)) then
 			Duel.Remove(sc,POS_FACEUP,REASON_COST)
 		else
 			Duel.SendtoDeck(c,nil,2,REASON_EFFECT)
@@ -1176,6 +1183,28 @@ function Auxiliary.NeosReturnOperation(c,extraop)
 			end
 		end
 	end
+end
+--Returns the zones, on the specified player's field, pointed by the specified number of Link markers. Includes Extra Monster Zones.
+function Duel.GetZoneWithLinkedCount(count,tp)
+	local g = Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_MZONE,LOCATION_MZONE,nil,TYPE_LINK)
+	local zones = {}
+	local z = {0x1,0x2,0x4,0x8,0x10,0x20,0x40}
+	for _,zone in ipairs(z) do
+		local ct = 0
+		for tc in aux.Next(g) do
+			if (zone&tc:GetLinkedZone(tp))~= 0 then
+				ct = ct + 1
+			end
+		end
+		zones[zone] = ct
+	end
+	local rzone = 0
+	for i,ct in pairs(zones) do
+		if ct >= count then
+			rzone = rzone | i
+		end
+	end
+	return rzone
 end
 
 function loadutility(file)
