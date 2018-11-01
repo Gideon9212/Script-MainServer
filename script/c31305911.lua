@@ -24,7 +24,7 @@ function c31305911.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function c31305911.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetTargetPlayer(1-tp)
+	Duel.SetTargetPlayer(Duel.GetAttacker():GetControler())
 	Duel.SetTargetParam(1000)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,0,0,1-tp,1000)
 end

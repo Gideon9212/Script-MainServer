@@ -27,7 +27,7 @@ function c62560742.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function c62560742.mgfilter(c,e,tp,sync)
 	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE)
-		and bit.band(c:GetReason(),0x80008)==0x80008 and c:GetReasonCard()==sync
+		and bit.band(c:GetReason(),0x80008)==0x80008 and c:GetReasonCard()==sync and c:IsType(TYPE_SYNCHRO)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c62560742.operation(e,tp,eg,ep,ev,re,r,rp)

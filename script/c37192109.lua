@@ -96,11 +96,21 @@ function c37192109.retop(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetLabelObject()
 	local sg=g:Filter(c37192109.retfilter,nil,e:GetLabel())
 	g:DeleteGroup()
+	if sg:GetCount()>1 and sg:GetClassCount(Card.GetPreviousControler)==1 then
+		local ft=Duel.GetLocationCount(sg:GetFirst():GetPreviousControler(),LOCATION_MZONE)
+		if ft==1 then
+			Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(37192109,0))
+			local tc=sg:Select(tp,1,1,nil):GetFirst()
+			Duel.ReturnToField(tc)
+			sg:RemoveCard(tc)
+		end
+	end
 	local tc=sg:GetFirst()
 	while tc do
 		Duel.ReturnToField(tc)
 		tc=sg:GetNext()
 	end
+	
 end
 function c37192109.thfilter(c)
 	return c:IsSetCard(0xc1) and c:IsAbleToHand()
