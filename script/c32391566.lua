@@ -37,5 +37,5 @@ function c32391566.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c32391566.val(e,re,ev,r,rp,rc)
-	return bit.band(r,REASON_EFFECT)~=0
+	return bit.band(r,REASON_EFFECT)~=0 and rp==1-e:GetHandlerPlayer()
 end
