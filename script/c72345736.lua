@@ -1,5 +1,7 @@
 --六武衆の結束
-function c72345736.initial_effect(c)
+--Six Samurai United
+local s,id=GetID()
+function s.initial_effect(c)
 	c:EnableCounterPermit(0x3)
 	c:SetCounterLimit(0x3,2)
 	--Activate
@@ -12,7 +14,7 @@ function c72345736.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
-	e2:SetOperation(c72345736.ctop)
+	e2:SetOperation(s.ctop)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -20,29 +22,37 @@ function c72345736.initial_effect(c)
 	--draw
 	local e4=Effect.CreateEffect(c)
 	e4:SetCategory(CATEGORY_DRAW)
-	e4:SetDescription(aux.Stringid(72345736,0))
+	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetRange(LOCATION_SZONE)
-	e4:SetCost(c72345736.drcost)
-	e4:SetTarget(c72345736.drtg)
-	e4:SetOperation(c72345736.drop)
+	e4:SetCost(s.drcost)
+	e4:SetTarget(s.drtg)
+	e4:SetOperation(s.drop)
 	c:RegisterEffect(e4)
+	--cannot link material
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e5:SetCode(EFFECT_CANNOT_BE_LINK_MATERIAL)
+	e5:SetValue(1)
+	c:RegisterEffect(e5)
 end
-function c72345736.ctfilter(c)
+s.counter_add_list={0x3}
+function s.ctfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x3d)
 end
-function c72345736.ctop(e,tp,eg,ep,ev,re,r,rp)
-	if eg:IsExists(c72345736.ctfilter,1,nil) then
+function s.ctop(e,tp,eg,ep,ev,re,r,rp)
+	if eg:IsExists(s.ctfilter,1,nil) then
 		e:GetHandler():AddCounter(0x3,1)
 	end
 end
-function c72345736.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end
 	local ct=e:GetHandler():GetCounter(0x3)
 	e:SetLabel(ct)
 	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
-function c72345736.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:GetCounter(0x3)>0 and Duel.IsPlayerCanDraw(tp,c:GetCounter(0x3)) end
 	local ct=e:GetLabel()
@@ -50,7 +60,7 @@ function c72345736.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetParam(ct)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,ct)
 end
-function c72345736.drop(e,tp,eg,ep,ev,re,r,rp)
+function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
