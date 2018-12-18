@@ -30,7 +30,7 @@ function s.initial_effect(c)
     e3:SetDescription(aux.Stringid(41209827,2))
     e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
     e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-    e3:SetProperty(EFFECT_FLAG_DELAY)
+    e3:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
     e3:SetCode(EVENT_DESTROYED)
     e3:SetCountLimit(1,id+200)
     e3:SetCondition(s.spcon)
@@ -47,11 +47,11 @@ function s.stop(e,tp,eg,ep,ev,re,r,rp)
     local b2=Duel.GetFieldGroupCount(tp,0,LOCATION_DECK)>4
     local p=0
     if b1 and b2 then
-        p=Duel.SelectOption(tp,aux.Stringid(id,3),aux.Stringid(id,4))
+        p=Duel.SelectOption(tp,aux.Stringid(id,4),aux.Stringid(id,3))
     elseif b1 then
-        p=Duel.SelectOption(tp,aux.Stringid(id,3))
+        p=Duel.SelectOption(tp,aux.Stringid(id,4))
     else
-        p=Duel.SelectOption(tp,aux.Stringid(id,4))+1
+        p=Duel.SelectOption(tp,aux.Stringid(id,3))+1
     end
     Duel.SortDecktop(tp,p,5)
 end
