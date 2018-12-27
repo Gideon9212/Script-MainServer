@@ -47,19 +47,20 @@ function s.stop(e,tp,eg,ep,ev,re,r,rp)
     local b2=Duel.GetFieldGroupCount(tp,0,LOCATION_DECK)>4
     local p=0
     if b1 and b2 then
-        p=Duel.SelectOption(tp,aux.Stringid(id,4),aux.Stringid(id,3))
+        p=Duel.SelectOption(tp,aux.Stringid(id,3),aux.Stringid(id,4))
     elseif b1 then
-        p=Duel.SelectOption(tp,aux.Stringid(id,4))
+        p=Duel.SelectOption(tp,aux.Stringid(id,3))
     else
-        p=Duel.SelectOption(tp,aux.Stringid(id,3))+1
+        p=Duel.SelectOption(tp,aux.Stringid(id,4))+1
     end
+    if tp==1 then p=1-p end
     Duel.SortDecktop(tp,p,5)
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
     local c=e:GetHandler()
     local bc=c:GetBattleTarget()
     if not c:IsRelateToBattle() or c:IsFacedown() then return false end
-    return bc:IsLocation(LOCATION_GRAVE) and bc:IsReason(REASON_BATTLE) and bc:IsType(TYPE_MONSTER)
+    return bc:IsReason(REASON_BATTLE) and bc:IsType(TYPE_MONSTER)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
     if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
@@ -104,7 +105,5 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
         Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
         local sg=g:Select(tp,ft,ft,nil)
         Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
-        g:Sub(sg)
-        Duel.SendtoGrave(g,REASON_RULE)
     end
 end

@@ -1,5 +1,6 @@
 --黒翼の魔術師
-function c49826746.initial_effect(c)
+local s,id=GetID()
+function s.initial_effect(c)
 	--Trap activate in set turn
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -7,6 +8,7 @@ function c49826746.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_SZONE,0)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsCode,80280737))
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsCode,CARD_ASSAULT_MODE))
 	c:RegisterEffect(e1)
 end
+s.listed_names={CARD_ASSAULT_MODE}
