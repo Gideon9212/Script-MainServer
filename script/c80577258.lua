@@ -1,6 +1,8 @@
 --雪の天気模様
-function c80577258.initial_effect(c)
-	c:SetUniqueOnField(1,0,80577258)
+--The Weather Snowy Canvas
+local s,id=GetID()
+function s.initial_effect(c)
+	c:SetUniqueOnField(1,0,id)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -8,37 +10,42 @@ function c80577258.initial_effect(c)
 	c:RegisterEffect(e1)
 	--effect gain
 	local e2=Effect.CreateEffect(c)
-	e2:SetDescription(aux.Stringid(80577258,0))
+	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetRange(LOCATION_MZONE)
-	e2:SetCost(aux.bfgcost)
-	e2:SetTarget(c80577258.thtg)
-	e2:SetOperation(c80577258.thop)
+	e2:SetCost(s.announcecost)
+	e2:SetTarget(s.thtg)
+	e2:SetOperation(s.thop)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_GRANT)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetTargetRange(LOCATION_MZONE,0)
-	e3:SetTarget(c80577258.eftg)
+	e3:SetTarget(s.eftg)
 	e3:SetLabelObject(e2)
 	c:RegisterEffect(e3)
 end
-function c80577258.eftg(e,c)
+function s.eftg(e,c)
 	local g=e:GetHandler():GetColumnGroup(1,1)
 	return c:IsType(TYPE_EFFECT) and c:IsSetCard(0x109) and c:GetSequence()<5 and g:IsContains(c)
 end
-function c80577258.thfilter(c)
+function s.thfilter(c)
 	return c:IsSetCard(0x109) and c:IsAbleToHand()
 end
-function c80577258.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(c80577258.thfilter,tp,LOCATION_DECK,0,1,nil) end
+function s.announcecost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,chk) end
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
+	aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,chk)
+end
+function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,0,0)
 end
-function c80577258.thop(e,tp,eg,ep,ev,re,r,rp)
+function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,c80577258.thfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if g:GetCount()>0 then
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
+	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 	end
