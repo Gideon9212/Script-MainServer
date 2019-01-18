@@ -1,48 +1,68 @@
 --超戦士の萌芽
-function c45948430.initial_effect(c)
+local s,id=GetID()
+function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DECKDES)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetCountLimit(1,45948430+EFFECT_COUNT_CODE_OATH)
-	e1:SetTarget(c45948430.target)
-	e1:SetOperation(c45948430.activate)
+	e1:SetCountLimit(1,id+EFFECT_COUNT_CODE_OATH)
+	e1:SetTarget(s.target)
+	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-function c45948430.filter(c,e,tp)
-	if not c:IsSetCard(0x10cf) or bit.band(c:GetType(),0x81)~=0x81
+function s.filter(c,e,tp)
+	if not c:IsSetCard(0x10cf) or not c:IsRitualMonster()
 		or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) then return false end
-	return Duel.IsExistingMatchingCard(c45948430.matfilter1,tp,LOCATION_HAND,0,1,c,tp,c)
+	return Duel.IsExistingMatchingCard(s.matfilter1,tp,LOCATION_HAND+LOCATION_DECK,0,1,c,tp,c)
 end
-function c45948430.matfilter1(c,tp,rc)
-	local lv=c:GetLevel()
-	return lv>0 and lv<8 and c:IsAttribute(ATTRIBUTE_LIGHT+ATTRIBUTE_DARK) and c:IsAbleToGrave() and c:IsCanBeRitualMaterial(rc)
-		and Duel.IsExistingMatchingCard(c45948430.matfilter2,tp,LOCATION_DECK,0,1,c,lv,c:GetAttribute(),rc)
+function s.matfilter1(c,tp,rc)
+	local loc=(LOCATION_HAND+LOCATION_DECK)-c:GetLocation()
+	return c:IsAttribute(ATTRIBUTE_LIGHT+ATTRIBUTE_DARK) and c:IsAbleToGrave() and c:IsCanBeRitualMaterial(rc)
+		and Duel.IsExistingMatchingCard(s.matfilter2,tp,loc,0,1,nil,c,tp,rc)
 end
-function c45948430.matfilter2(c,lv,att,rc)
-	return ((c:IsAttribute(ATTRIBUTE_LIGHT) and att==ATTRIBUTE_DARK) or (c:IsAttribute(ATTRIBUTE_DARK) and att==ATTRIBUTE_LIGHT))
-		and c:GetLevel()==8-lv and c:IsAbleToGrave() and c:IsCanBeRitualMaterial(rc)
+function s.matfilter2(c,gc,tp,rc)
+	if c:IsAttribute(ATTRIBUTE_LIGHT+ATTRIBUTE_DARK) and ((c:GetAttribute()|gc:GetAttribute())&(ATTRIBUTE_LIGHT+ATTRIBUTE_DARK)) == (ATTRIBUTE_LIGHT+ATTRIBUTE_DARK)
+		and c:IsAbleToGrave() and c:IsCanBeRitualMaterial(rc) then
+			local mg=Group.FromCards(c,gc)
+			Duel.SetSelectedCard(mg)
+			return mg:CheckWithSumEqual(Card.GetRitualLevel,8,0,99999,rc) 
+	end
+	return false
 end
-function c45948430.target(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsExistingMatchingCard(c45948430.filter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,nil,e,tp)
+			and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,nil,e,tp)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_GRAVE)
 end
-function c45948430.activate(e,tp,eg,ep,ev,re,r,rp)
+function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local rg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(c45948430.filter),tp,LOCATION_HAND+LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local rg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_GRAVE,0,1,1,nil,e,tp)
 	local rc=rg:GetFirst()
 	if rc then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-		local mat=Duel.SelectMatchingCard(tp,c45948430.matfilter1,tp,LOCATION_HAND,0,1,1,rc,tp,rc)
-		local mc=mat:GetFirst()
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-		local mat2=Duel.SelectMatchingCard(tp,c45948430.matfilter2,tp,LOCATION_DECK,0,1,1,nil,mc:GetLevel(),mc:GetAttribute(),rc)
-		mat:Merge(mat2)
+		local mg = Duel.GetMatchingGroup(s.matfilter1,tp,LOCATION_HAND+LOCATION_DECK,0,rc,tp,rc)
+		mat = Group.CreateGroup()
+		while true do
+			local cg
+			if #mat==0 then
+				cg=mg:Filter(s.matfilter1,nil,tp,rc)
+			elseif #mat==1 then
+				cg=mg:Filter(s.matfilter2,nil,mat:GetFirst(),tp,rc):Filter(aux.NOT(Card.IsLocation),nil,mat:GetFirst():GetLocation())
+			else
+				break
+			end
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+			local tc=cg:SelectUnselect(mat,tp,false,false,1,2)
+			if not tc then break end
+			if not mat:IsContains(tc) then
+				mat=mat+tc
+			else
+				mat=mat-tc
+			end
+		end
 		rc:SetMaterial(mat)
 		Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_RITUAL)
 		Duel.BreakEffect()

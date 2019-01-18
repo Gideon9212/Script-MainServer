@@ -1,5 +1,7 @@
 --デンジャラスマシン TYPE－6
-function c76895648.initial_effect(c)
+--Dangerous Machine Type-6
+local s,id=GetID()
+function s.initial_effect(c)
 	--activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)	
@@ -7,25 +9,25 @@ function c76895648.initial_effect(c)
 	c:RegisterEffect(e1)
 	--dice
 	local e2=Effect.CreateEffect(c)
-	e2:SetDescription(aux.Stringid(76895648,0))
+	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)	
-	e2:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DRAW)
+	e2:SetCategory(CATEGORY_DRAW)
 	e2:SetCode(EVENT_PHASE+PHASE_STANDBY)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCountLimit(1)
-	e2:SetCondition(c76895648.condition)
-	e2:SetTarget(c76895648.target)
-	e2:SetOperation(c76895648.operation)
+	e2:SetCondition(s.condition)
+	e2:SetTarget(s.target)
+	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
-function c76895648.condition(e,tp,eg,ep,ev,re,r,rp)
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer()
 end
-function c76895648.target(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
 end
-function c76895648.operation(e,tp,eg,ep,ev,re,r,rp)
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local dice=Duel.TossDice(tp,1)
 	if dice==1 then

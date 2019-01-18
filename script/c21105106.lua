@@ -96,46 +96,55 @@ end
 function c21105106.filter(c,tp)
 	return c:IsControler(tp) and c:IsLocation(LOCATION_MZONE)
 end
-function c21105106.ritual_custom_condition(c,mg,ft)
+function c21105106.ritual_custom_condition(c,mg,ft,rittype)
 	local tp=c:GetControler()
 	local g=mg:Filter(c21105106.filter,c,tp)
-	return ft>-3 and g:IsExists(c21105106.ritfilter1,1,nil,c:GetLevel(),g)
+	return ft>-3 and g:IsExists(c21105106.ritfilter1,1,nil,c:GetLevel(),g,c,rittype)
 end
-function c21105106.ritfilter1(c,lv,mg)
-	lv=lv-c:GetLevel()
-	if lv<2 then return false end
+function c21105106.ritfilter1(c,lv,mg,sc,rittype)
 	local mg2=mg:Clone()
 	mg2:Remove(Card.IsRace,nil,c:GetRace())
-	return mg2:IsExists(c21105106.ritfilter2,1,nil,lv,mg2)
+	return mg2:IsExists(c21105106.ritfilter2,1,c,lv,mg2,Group.CreateGroup()+c,sc,rittype)
 end
-function c21105106.ritfilter2(c,lv,mg)
-	local clv=c:GetLevel()
-	lv=lv-clv
-	if lv<1 then return false end
+function c21105106.ritfilter2(c,lv,mg,sg,sc,rittype)
 	local mg2=mg:Clone()
 	mg2:Remove(Card.IsRace,nil,c:GetRace())
-	return mg2:IsExists(c21105106.ritfilter3,1,nil,lv)
+	return mg2:IsExists(c21105106.ritfilter3,1,sg,lv,sg+c,sc,rittype)
 end
-function c21105106.ritfilter3(c,lv)
-	return c:GetLevel()==lv
+function c21105106.ritfilter3(c,lv,sg,sc,rittype)
+	if rittype=="equal" then
+		return (sg+c):CheckWithSumEqual(Card.GetRitualLevel,lv,3,3,sc)
+	else
+		Duel.SetSelectedCard(sg+c)
+		return (sg+c):CheckWithSumGreater(Card.GetRitualLevel,lv,sc)
+	end
 end
-function c21105106.ritual_custom_operation(c,mg)
+function c21105106.ritual_custom_operation(c,mg,rittype)
 	local tp=c:GetControler()
 	local lv=c:GetLevel()
 	local g=mg:Filter(c21105106.filter,c,tp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-	local g1=g:FilterSelect(tp,c21105106.ritfilter1,1,1,nil,lv,g)
-	local tc1=g1:GetFirst()
-	lv=lv-tc1:GetLevel()
-	g:Remove(Card.IsRace,nil,tc1:GetRace())
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-	local g2=g:FilterSelect(tp,c21105106.ritfilter2,1,1,nil,lv,g)
-	local tc2=g2:GetFirst()
-	lv=lv-tc2:GetLevel()
-	g:Remove(Card.IsRace,nil,tc2:GetRace())
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-	local g3=g:FilterSelect(tp,c21105106.ritfilter3,1,1,nil,lv)
-	g1:Merge(g2)
-	g1:Merge(g3)
-	c:SetMaterial(g1)
+	local sg=Group.CreateGroup()
+	while #sg<3 do
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
+		if #sg==0 then
+			sg = sg + g:Filter(c21105106.ritfilter1,nil,lv,g,c,rittype):SelectUnselect(sg,tp,false,false,lv)
+		elseif #sg==1 then
+			local tc = g:Filter(c21105106.ritfilter2,sg,lv,g,sg,c,rittype):Filter(function(c,sg)
+				return not sg:IsExists(Card.IsRace,1,nil,c:GetRace()) end,nil,sg):SelectUnselect(sg,tp,false,false,lv)
+			if sg:IsContains(tc) then
+				sg=sg-tc
+			else
+				sg=sg+tc
+			end
+		elseif #sg==2 then
+			local tc = g:Filter(c21105106.ritfilter3,sg,lv,sg,c,rittype):Filter(function(c,sg)
+				return not sg:IsExists(Card.IsRace,1,nil,c:GetRace()) end,nil,sg):SelectUnselect(sg,tp,false,false,lv)
+			if sg:IsContains(tc) then
+				sg=sg-tc
+			else
+				sg=sg+tc
+			end
+		end
+	end
+	c:SetMaterial(sg)
 end
