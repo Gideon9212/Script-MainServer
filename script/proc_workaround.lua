@@ -18,30 +18,6 @@ local ils = Card.IsLinkState
 Card.IsLinkState = function(c)
     return ils(c) or Duel.IsExistingMatchingCard(function(c,tc)return c:IsFaceup() and c:GetLinkedGroup():IsContains(tc) end,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,c)
 end
-
-local fsets = Card.IsFusionSetCard
-local fgets = Card.GetFusionSetCard
-local fsetc = Card.IsFusionCode
-local fgetc = Card.GetFusionCode
-local tmp = function(set,func)
-	return function(...)
-		local prev = aux.linkset
-		aux.linkset=set
-		local res = {func(...)}
-		aux.linkset = prev
-		return table.unpack(res)
-	end
-end
-Card.IsFusionSetCard = tmp(false,fsets)
-Card.IsLinkSetCard = tmp(true,fsets)
-Card.GetFusionSetCard = tmp(false,fgets)
-Card.GetLinkSetCard = tmp(true,fgets)
-Card.IsFusionCode = tmp(false,fsetc)
-Card.IsLinkCode = tmp(true,fsetc)
-Card.GetFusionCode = tmp(false,fgetc)
-Card.GetLinkCode = tmp(true,fgetc)
-tmp = nil
---[[
 function Card.IsFusionSetCard(...)
 	local arg = {...}
 	return Card.IsSetCard(arg[1],arg[2],nil,SUMMON_TYPE_FUSION,2)
@@ -74,7 +50,7 @@ end
 function Card.GetLinkCode(...)
 	local arg = {...}
 	return Card.GetCode(arg[1],nil,SUMMON_TYPE_LINK,2)
-end--]]
+end
 
 --Lair of Darkness
 function Auxiliary.ReleaseCostFilter(c,f,...)
