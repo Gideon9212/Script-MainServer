@@ -9,6 +9,8 @@ The main script repo normally is https://github.com/Ygoproco/Live2017Links
 
 - proc_workaround
 - utility
+- c50366775 (Formud Skipper)
+- c3679218 (Troymare Mermaid)
 
 
 For the ones updating the server:
