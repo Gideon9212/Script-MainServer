@@ -30,8 +30,8 @@ function c3679218.initial_effect(c)
 	e3:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e3)
 end
-function c3679218.matfilter(c)
-	return c:IsLinkSetCard(0x112) and not c:IsLinkCode(3679218)
+function c3679218.matfilter(c,lc,sumtp,sp)
+	return c:IsSetCard(0x112,lc,sumtp,sp) and not c:IsSummonCode(lc,sumtp,sp,3679218)
 end
 function c3679218.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
