@@ -57,7 +57,7 @@ end
 function s.descond(e)
 	local c=e:GetHandler()
 	local eg=c:GetEquipGroup()
-	return #eg>0 and eg:IsExists(Card.IsCode,1,nil,CARD_CURSED_EYE_SELENE)
+	return #eg>0 and eg:IsExists(Card.IsCode,1,nil,CARD_EVIL_EYE_SELENE)
 end
 function s.destfilt(c)
 	return c:IsSummonType(SUMMON_TYPE_SPECIAL)

@@ -21,6 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 	--control
 	local e3=Effect.CreateEffect(c)
+	e3:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_SET_CONTROL)
 	e3:SetRange(LOCATION_SZONE)
@@ -47,7 +48,7 @@ function s.initial_effect(c)
 	e5:SetOperation(s.desop)
 	c:RegisterEffect(e5)
 end
-s.listed_names={CARD_CURSED_EYE_SELENE}
+s.listed_names={CARD_EVIL_EYE_SELENE}
 function s.cfilter1(c)
 	return c:IsFaceup() and c:IsSetCard(0x226)
 end
@@ -70,15 +71,29 @@ end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS):GetFirst()
-	if c:IsRelateToEffect(re) and tc and tc:IsFaceup() and tc:IsRelateToEffect(re) then
+	if c:IsRelateToEffect(re) and tc and tc:IsRelateToEffect(re) then
 		c:SetCardTarget(tc)
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_SET_CONTROL)
+		e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_OWNER_RELATE)
+		e1:SetRange(LOCATION_MZONE)
+		e1:SetValue(tp)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
+		e1:SetCondition(s.con)
+		tc:RegisterEffect(e1)
 	end
+end
+function s.con(e)
+	local c=e:GetOwner()
+	local h=e:GetHandler()
+	return c:IsHasCardTarget(h)
 end
 function s.tg(e,c)
 	return e:GetHandlerPlayer()
 end
 function s.sccon(e)
-	return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsCode,CARD_CURSED_EYE_SELENE),e:GetHandlerPlayer(),LOCATION_SZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsCode,CARD_EVIL_EYE_SELENE),e:GetHandlerPlayer(),LOCATION_SZONE,0,1,nil)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
