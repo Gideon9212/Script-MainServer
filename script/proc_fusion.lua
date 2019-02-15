@@ -279,9 +279,10 @@ function Auxiliary.FOperationMixRep(insf,sub,fun1,minc,maxc,...)
 				local chkf=chkfnf&0xff
 				local c=e:GetHandler()
 				local tp=c:GetControler()
-				local notfusion=(chkfnf>>8)&0xf~=0
-				local contact=(chkfnf>>12)&0xf~=0
-				local matcheck=(chkfnf>>16)&0xf==0 and e:GetValue() or 0
+				local notfusion=(chkfnf&FUSPROC_NOTFUSION)~=0
+				local contact=(chkfnf&FUSPROC_CONTACTFUS)~=0
+				local listedmats=(chkfnf&FUSPROC_LISTEDMATS)~=0
+				local matcheck=e:GetValue()
 				local sub=not listedmats and (sub or notfusion) and not contact
 				local sg=Group.CreateGroup()
 				local mg=eg:Filter(Auxiliary.FConditionFilterMix,c,c,sub,sub,contact,matcheck,tp,fun1,table.unpack(funs))
