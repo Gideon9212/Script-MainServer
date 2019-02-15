@@ -1385,17 +1385,6 @@ function Auxiliary.zptcon(filter)
         return eg:IsExists(Auxiliary.zptfilter(filter),1,nil,e:GetHandler(),tp)
     end
 end
-function loadutility(file)
-	local f1 = loadfile("expansions/live2017links/script/"..file)
-	local f2 = loadfile("expansions/script/"..file)
-	if(f1 == nil and f2== nil) then
-		dofile("script/"..file)
-	elseif(f1 == nil) then
-		f2()
-	else
-		f1()
-	end
-end
 --Discard cost for Witchcraft monsters, supports the replacements from the Continuous Spells
 function Auxiliary.WitchcraftDiscardFilter(c)
 	return c:IsHasEffect(100412024) and c:IsAbleToGraveAsCost()
@@ -1426,6 +1415,18 @@ function Auxiliary.WitchcraftDiscardCost(f,minc,maxc)
 					Duel.SendtoGrave(sg,REASON_COST+REASON_DISCARD)
 				end
 			end
+end
+
+function loadutility(file)
+	local f1 = loadfile("expansions/live2017links/script/"..file)
+	local f2 = loadfile("expansions/script/"..file)
+	if(f1 == nil and f2== nil) then
+		dofile("script/"..file)
+	elseif(f1 == nil) then
+		f2()
+	else
+		f1()
+	end
 end
 
 loadutility("proc_fusion.lua")
