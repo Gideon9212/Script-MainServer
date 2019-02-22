@@ -4,7 +4,7 @@ function c61777313.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_SYNCHRO_MAT_RESTRICTION)
+	e1:SetCode(73941492+TYPE_SYNCHRO)
 	e1:SetValue(aux.TargetBoolFunction(Card.IsSetCard,0x42))
 	c:RegisterEffect(e1)
 	--level change
