@@ -372,10 +372,10 @@ function Auxiliary.MatNumChkF2(tg,lv,xyz)
 	return true
 end
 function Auxiliary.TuneMagFilter(c,e,f)
-	return f and not f(e,c)
+	return type(f) == 'function' and not f(e,c)
 end
 function Auxiliary.TuneMagFilterXyz(c,e,f)
-	return not f or f(e,c) or c:IsHasEffect(511002116) or c:IsHasEffect(511001175)
+	return not f or (type(f) == 'number') or f(e,c) or c:IsHasEffect(511002116) or c:IsHasEffect(511001175)
 end
 function Auxiliary.XyzCondition(f,lv,minc,maxc,mustbemat,exchk)
 	--og: use special material
