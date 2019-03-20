@@ -1,6 +1,10 @@
 
 function Auxiliary.TuneMagFilterFus(c,e,f)
-	return not f or f(e,c)
+	--tempo, will be removed soon
+	if type(f) == 'number' then
+		Debug.Message("it is " .. e:GetOwner():GetCode() .. "-" .. e:GetHandler():GetCode())
+	end
+	return not f or (type(f) == 'number') or (type(f)=='function' and f(e,c))
 end
 --material_count: number of different names in material list
 --material: names in material list
