@@ -4,6 +4,7 @@ POS_FACEUP_DEFENCE=POS_FACEUP_DEFENSE
 POS_FACEDOWN_DEFENCE=POS_FACEDOWN_DEFENSE
 RACE_CYBERS=RACE_CYBERSE
 TYPE_EXTRA=TYPE_FUSION+TYPE_SYNCHRO+TYPE_XYZ+TYPE_LINK
+TYPES_TOKEN=TYPE_MONSTER+TYPE_NORMAL+TYPE_TOKEN
 ATTRIBUTE_DIVINE=ATTRIBUTE_DEVINE
 RACE_WINGEDBEAST=RACE_WINDBEAST
 RACE_PSYCHIC=RACE_PSYCHO
@@ -611,7 +612,7 @@ function Auxiliary.IsCodeListed(c,...)
 end
 --card effect disable filter(target)
 function Auxiliary.disfilter1(c)
-	return c:IsFaceup() and not c:IsDisabled() and (not c:IsType(TYPE_NORMAL) or c:GetOriginalType()&TYPE_EFFECT~=0)
+	return c:IsFaceup() and not c:IsDisabled() and (not c:IsNonEffectMonster() or c:GetOriginalType()&TYPE_EFFECT~=0)
 end
 --condition of EVENT_BATTLE_DESTROYING
 function Auxiliary.bdcon(e,tp,eg,ep,ev,re,r,rp)
@@ -1387,11 +1388,11 @@ function Auxiliary.zptcon(filter)
 end
 --Discard cost for Witchcraft monsters, supports the replacements from the Continuous Spells
 function Auxiliary.WitchcraftDiscardFilter(c)
-	return c:IsHasEffect(100412024) and c:IsAbleToGraveAsCost()
+	return c:IsHasEffect(EFFECT_WITCHCRAFT_REPLACE) and c:IsAbleToGraveAsCost()
 end
 function Auxiliary.WitchcraftDiscardGroup(minc)
 	return	function(sg,e,tp,mg)
-				if sg:IsExists(Card.IsHasEffect,1,nil,100412024) then
+				if sg:IsExists(Card.IsHasEffect,1,nil,EFFECT_WITCHCRAFT_REPLACE) then
 					return #sg==1
 				else
 					return #sg>=minc
@@ -1406,8 +1407,8 @@ function Auxiliary.WitchcraftDiscardCost(f,minc,maxc)
 				if chk==0 then return Duel.IsExistingMatchingCard(f,tp,LOCATION_HAND,0,minc,nil) or Duel.IsExistingMatchingCard(Auxiliary.WitchcraftDiscardFilter,tp,LOCATION_ONFIELD,0,1,nil) end
 				local g=Duel.GetMatchingGroup(f,tp,LOCATION_HAND,0,nil)
 				g:Merge(Duel.GetMatchingGroup(Auxiliary.WitchcraftDiscardFilter,tp,LOCATION_ONFIELD,0,nil))
-				local sg=Auxiliary.SelectUnselectGroup(g,e,tp,1,maxc,Auxiliary.WitchcraftDiscardGroup(minc),1,tp,aux.Stringid(100412024,2))
-				if sg:IsExists(Card.IsHasEffect,1,nil,100412024) then
+				local sg=Auxiliary.SelectUnselectGroup(g,e,tp,1,maxc,Auxiliary.WitchcraftDiscardGroup(minc),1,tp,aux.Stringid(EFFECT_WITCHCRAFT_REPLACE,2))
+				if sg:IsExists(Card.IsHasEffect,1,nil,EFFECT_WITCHCRAFT_REPLACE) then
 					local id=sg:GetFirst():GetOriginalCode()
 					Duel.SendtoGrave(sg,REASON_COST)
 					Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
@@ -1416,7 +1417,19 @@ function Auxiliary.WitchcraftDiscardCost(f,minc,maxc)
 				end
 			end
 end
-
+--function to check if a card are same atribute.
+function Group.CheckSameProperty(g,f,...)
+	local prop
+	local arg = {...}
+	for tc in aux.Next(g) do
+		if not prop then
+			prop = f(tc,table.unpack(arg))
+		else
+			prop = prop & f(tc,table.unpack(arg))
+		end
+	end
+	return prop ~= 0, prop
+end
 function loadutility(file)
 	local f1 = loadfile("expansions/live2017links/script/"..file)
 	local f2 = loadfile("expansions/script/"..file)
