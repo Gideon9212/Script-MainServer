@@ -1,7 +1,7 @@
-
 function Auxiliary.TuneMagFilterFus(c,e,f)
 	--tempo, will be removed soon
 	if type(f) == 'number' then
+		Debug.Message(EFFECT_FUSION_MAT_RESTRICTION)
 		Debug.Message("it is " .. e:GetOwner():GetCode() .. "-" .. e:GetHandler():GetCode())
 	end
 	return not f or (type(f) == 'number') or (type(f)=='function' and f(e,c))
