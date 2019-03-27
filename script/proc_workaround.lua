@@ -12,6 +12,9 @@ function GetID()
     local s_id=tonumber(string.sub(str,2))
     return scard,s_id
 end
+function Card.IsNonEffectMonster(c)
+	return c:IsType(TYPE_MONSTER) and not c:IsType(TYPE_EFFECT)
+end
 
 --workaround for gryphon while update not happen and fix that (credits to cc/l)
 local ils = Card.IsLinkState
