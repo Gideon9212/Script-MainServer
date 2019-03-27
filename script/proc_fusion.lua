@@ -1,4 +1,4 @@
-function Auxiliary.TuneMagFilterFus(c,e,f)
+function Auxiliary.HarmonizingMagFilterFus(c,e,f)
 	--tempo, will be removed soon
 	if type(f) == 'number' then
 		Debug.Message(EFFECT_FUSION_MAT_RESTRICTION)
@@ -104,7 +104,7 @@ function Auxiliary.FOperationMix(insf,sub,...)
 						local eff={gc:GetCardEffect(EFFECT_FUSION_MAT_RESTRICTION)}
 						for i=1,#eff do
 							local f=eff[i]:GetValue()
-							mg=mg:Filter(Auxiliary.TuneMagFilterFus,tc,eff[i],f)
+							mg=mg:Filter(Auxiliary.HarmonizingMagFilterFus,tc,eff[i],f)
 						end
 					end
 				end
@@ -174,10 +174,10 @@ function Auxiliary.FSelectMix(c,tp,mg,sg,mustg,fc,sub,sub2,contact,chkf,...)
 	if not contact and c:IsHasEffect(EFFECT_FUSION_MAT_RESTRICTION) then
 		local eff={c:GetCardEffect(EFFECT_FUSION_MAT_RESTRICTION)}
 		for i,f in ipairs(eff) do
-			if sg:IsExists(Auxiliary.TuneMagFilter,1,c,f,f:GetValue()) then
+			if sg:IsExists(Auxiliary.HarmonizingMagFilter,1,c,f,f:GetValue()) then
 				return false
 			end
-			local sg2=mg2:Filter(function(c) return not Auxiliary.TuneMagFilterFus(c,f,f:GetValue()) end,nil)
+			local sg2=mg2:Filter(function(c) return not Auxiliary.HarmonizingMagFilterFus(c,f,f:GetValue()) end,nil)
 			-- rg:Merge(sg2)
 			mg2:Sub(sg2)
 			if mustg:GetCount()>0 and not mg2:Includes(mustg) then
@@ -191,7 +191,7 @@ function Auxiliary.FSelectMix(c,tp,mg,sg,mustg,fc,sub,sub2,contact,chkf,...)
 		for tc in aux.Next(g2) do
 			local eff={tc:GetCardEffect(EFFECT_FUSION_MAT_RESTRICTION)}
 			for i,f in ipairs(eff) do
-				if Auxiliary.TuneMagFilter(c,f,f:GetValue()) then
+				if Auxiliary.HarmonizingMagFilter(c,f,f:GetValue()) then
 					return false
 				end
 			end
@@ -423,11 +423,11 @@ function Auxiliary.FSelectMixRep(c,tp,mg,sg,mustg,fc,sub,sub2,contact,chkf,fun1,
 	if not contact and c:IsHasEffect(EFFECT_FUSION_MAT_RESTRICTION) then
 		local eff={c:GetCardEffect(EFFECT_FUSION_MAT_RESTRICTION)}
 		for i,f in ipairs(eff) do
-			if sg:IsExists(Auxiliary.TuneMagFilter,1,c,f,f:GetValue()) then
+			if sg:IsExists(Auxiliary.HarmonizingMagFilter,1,c,f,f:GetValue()) then
 				-- mg:Merge(rg)
 				return false
 			end
-			local sg2=mg2:Filter(function(c) return not Auxiliary.TuneMagFilterFus(c,f,f:GetValue()) end,nil)
+			local sg2=mg2:Filter(function(c) return not Auxiliary.HarmonizingMagFilterFus(c,f,f:GetValue()) end,nil)
 			-- rg:Merge(sg2)
 			mg2:Sub(sg2)
 			if mustg:GetCount()>0 and not mg2:Includes(mustg) then
@@ -441,7 +441,7 @@ function Auxiliary.FSelectMixRep(c,tp,mg,sg,mustg,fc,sub,sub2,contact,chkf,fun1,
 		for tc in aux.Next(g2) do
 			local eff={tc:GetCardEffect(EFFECT_FUSION_MAT_RESTRICTION)}
 			for i,f in ipairs(eff) do
-				if Auxiliary.TuneMagFilter(c,f,f:GetValue()) then
+				if Auxiliary.HarmonizingMagFilter(c,f,f:GetValue()) then
 					-- mg:Merge(rg)
 					return false
 				end
@@ -564,7 +564,7 @@ function Auxiliary.FOperationMixRepUnfix(insf,sub,minc,maxc,...)
 						local eff={gc:GetCardEffect(EFFECT_FUSION_MAT_RESTRICTION)}
 						for i=1,#eff do
 							local f=eff[i]:GetValue()
-							mg=mg:Filter(Auxiliary.TuneMagFilterFus,tc,eff[i],f)
+							mg=mg:Filter(Auxiliary.HarmonizingMagFilterFus,tc,eff[i],f)
 						end
 					end
 				end
@@ -662,10 +662,10 @@ function Auxiliary.FCheckSelectMixRepUnfixAll(c,tp,mg,sg,mustg,g,fc,sub,sub2,chk
 		if c:IsHasEffect(EFFECT_FUSION_MAT_RESTRICTION) then
 			local eff={c:GetCardEffect(EFFECT_FUSION_MAT_RESTRICTION)}
 			for _,fun in ipairs(eff) do
-				if (sg+g):IsExists(Auxiliary.TuneMagFilter,1,c,fun,fun:GetValue()) then
+				if (sg+g):IsExists(Auxiliary.HarmonizingMagFilter,1,c,fun,fun:GetValue()) then
 					return false
 				end
-				local sg2=mg2:Filter(function(c) return not Auxiliary.TuneMagFilterFus(c,fun,fun:GetValue()) end,nil)
+				local sg2=mg2:Filter(function(c) return not Auxiliary.HarmonizingMagFilterFus(c,fun,fun:GetValue()) end,nil)
 				mg2:Sub(sg2)
 			end
 		end
@@ -673,7 +673,7 @@ function Auxiliary.FCheckSelectMixRepUnfixAll(c,tp,mg,sg,mustg,g,fc,sub,sub2,chk
 		for tc in aux.Next(g2) do
 			local eff={tc:GetCardEffect(EFFECT_FUSION_MAT_RESTRICTION)}
 			for _,fun in ipairs(eff) do
-				if Auxiliary.TuneMagFilter(c,fun,fun:GetValue()) then
+				if Auxiliary.HarmonizingMagFilter(c,fun,fun:GetValue()) then
 					return false
 				end
 			end
@@ -724,11 +724,11 @@ function Auxiliary.FSelectMixRepUnfix(c,tp,mg,sg,mustg,fc,sub,sub2,minc,maxc,chk
 	if c:IsHasEffect(EFFECT_FUSION_MAT_RESTRICTION) then
 		local eff={c:GetCardEffect(EFFECT_FUSION_MAT_RESTRICTION)}
 		for i,f in ipairs(eff) do
-			if sg:IsExists(Auxiliary.TuneMagFilter,1,c,f,f:GetValue()) then
+			if sg:IsExists(Auxiliary.HarmonizingMagFilter,1,c,f,f:GetValue()) then
 				mg:Merge(rg)
 				return false
 			end
-			local sg2=mg:Filter(function(c) return not Auxiliary.TuneMagFilterFus(c,f,f:GetValue()) end,nil)
+			local sg2=mg:Filter(function(c) return not Auxiliary.HarmonizingMagFilterFus(c,f,f:GetValue()) end,nil)
 			rg:Merge(sg2)
 			mg:Sub(sg2)
 		end
@@ -738,7 +738,7 @@ function Auxiliary.FSelectMixRepUnfix(c,tp,mg,sg,mustg,fc,sub,sub2,minc,maxc,chk
 	for tc in aux.Next(g2) do
 		local eff={tc:GetCardEffect(EFFECT_FUSION_MAT_RESTRICTION)}
 		for i,f in ipairs(eff) do
-			if Auxiliary.TuneMagFilter(c,f,f:GetValue()) then
+			if Auxiliary.HarmonizingMagFilter(c,f,f:GetValue()) then
 				mg:Merge(rg)
 				return false
 			end
@@ -946,10 +946,10 @@ function Auxiliary.ShaddollRecursion(c,tp,mg,sg,exg,mustg,fc,chkf,f1,f2)
 	if not contact and c:IsHasEffect(EFFECT_FUSION_MAT_RESTRICTION) then
 		local eff={c:GetCardEffect(EFFECT_FUSION_MAT_RESTRICTION)}
 		for i,f in ipairs(eff) do
-			if sg:IsExists(Auxiliary.TuneMagFilter,1,c,f,f:GetValue()) then
+			if sg:IsExists(Auxiliary.HarmonizingMagFilter,1,c,f,f:GetValue()) then
 				return false
 			end
-			local sg2=mg2:Filter(function(c) return not Auxiliary.TuneMagFilterFus(c,f,f:GetValue()) end,nil)
+			local sg2=mg2:Filter(function(c) return not Auxiliary.HarmonizingMagFilterFus(c,f,f:GetValue()) end,nil)
 			mg2:Sub(sg2)
 		end
 	end
@@ -960,7 +960,7 @@ function Auxiliary.ShaddollRecursion(c,tp,mg,sg,exg,mustg,fc,chkf,f1,f2)
 			while tc do
 				local eff={tc:GetCardEffect(EFFECT_FUSION_MAT_RESTRICTION)}
 				for i,f in ipairs(eff) do
-					if Auxiliary.TuneMagFilter(c,f,f:GetValue()) then
+					if Auxiliary.HarmonizingMagFilter(c,f,f:GetValue()) then
 						return false
 					end
 				end
