@@ -1,8 +1,8 @@
 function Auxiliary.HarmonizingMagFilterFus(c,e,f)
 	--tempo, will be removed soon
 	if type(f) == 'number' then
-		Debug.Message(EFFECT_FUSION_MAT_RESTRICTION)
-		Debug.Message("it is " .. e:GetOwner():GetCode() .. "-" .. e:GetHandler():GetCode())
+		Debug.Message("EFFECT_FUSION_MAT_RESTRICTION = " ..tostring(EFFECT_FUSION_MAT_RESTRICTION))
+		Debug.Message("Owner = " .. e:GetOwner():GetCode() .. " | Handler = " .. e:GetHandler():GetCode())
 	end
 	return not f or (type(f) == 'number') or (type(f)=='function' and f(e,c))
 end
