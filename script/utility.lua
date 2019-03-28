@@ -11,7 +11,7 @@ RACE_PSYCHIC=RACE_PSYCHO
 RACE_DIVINE=RACE_DEVINE
 SUMMON_TYPE_TRIBUTE=SUMMON_TYPE_ADVANCE
 SUMMON_TYPE_GEMINI=SUMMON_TYPE_DUAL
-
+Debug.Message("The latest version of the utilities has been loaded")
 --the lua version of the bit32 lib, which is deprecated in lua 5.3
 bit={}
 function bit.band(a,b)
