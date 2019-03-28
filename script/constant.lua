@@ -1,3 +1,4 @@
+Debug.Message("The latest version of the constant file has been loaded")
 --min/max value
 MIN_ID		=1000		--4 digit, by DataManager::GetDesc()
 MAX_ID		=268435455	--9 digit, by DataManager::GetDesc()
