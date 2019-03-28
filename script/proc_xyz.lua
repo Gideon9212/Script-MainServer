@@ -372,7 +372,13 @@ function Auxiliary.MatNumChkF2(tg,lv,xyz)
 	return true
 end
 function Auxiliary.HarmonizingMagFilter(c,e,f)
-	return type(f) == 'function' and not f(e,c)
+	--original : return type(f) == 'function' and not f(e,c)
+	--temporary change, for debugging
+	if type(f) == 'number' then
+		Debug.Message("EFFECT_XYZ_MAT_RESTRICTION = " ..tostring(EFFECT_XYZ_MAT_RESTRICTION))
+		Debug.Message("Owner = " .. e:GetOwner():GetCode() .. " | Handler = " .. e:GetHandler():GetCode())
+	end
+	return not f or (type(f) == 'number') or (type(f)=='function' and f(e,c))
 end
 function Auxiliary.HarmonizingMagFilterXyz(c,e,f)
 	return not f or (type(f) == 'number') or f(e,c) or c:IsHasEffect(511002116) or c:IsHasEffect(511001175)
