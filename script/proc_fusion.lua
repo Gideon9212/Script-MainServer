@@ -1,5 +1,6 @@
 function Auxiliary.HarmonizingMagFilterFus(c,e,f)
-	--tempo, will be removed soon
+	--original : return type(f) == 'function' and not f(e,c)
+	--temporary change, for debugging
 	if type(f) == 'number' then
 		Debug.Message("EFFECT_FUSION_MAT_RESTRICTION = " ..tostring(EFFECT_FUSION_MAT_RESTRICTION))
 		Debug.Message("Owner = " .. e:GetOwner():GetCode() .. " | Handler = " .. e:GetHandler():GetCode())
